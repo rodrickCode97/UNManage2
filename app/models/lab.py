@@ -16,7 +16,7 @@ class Lab(db.Model):
     
     UniqueConstraint("buildingNumber", "roomNumber")
 
-    profiles = db.relationship("Profile", back_populates='labs')
+    profiles = db.relationship("Profile", back_populates='owned_labs')
     barrels = db.relationship("Barrel", back_populates='labs', cascade='all, delete-orphan')
 
 def to_dict(self):
