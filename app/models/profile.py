@@ -15,7 +15,7 @@ class Profile(db.Model):
     updatedAt = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     users = db.relationship('User', back_populates='profiles')
-    owned_labs = db.relationship('Lab', back_populates='profiles', cascade="all, delete-orphan")
+    owned_labs = db.relationship('Lab', back_populates='owner', cascade="all, delete-orphan")
     vendors = db.relationship('Vendor', back_populates='profiles', cascade='all, delete-orphan')
 
     def to_dict(self):
