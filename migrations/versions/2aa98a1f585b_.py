@@ -67,7 +67,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['contact_id'], ['profiles.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    if environment == "production":
+    if  environment == "production":
         op.execute(f"ALTER TABLE vendors SET SCHEMA {SCHEMA};")
     op.create_table('barrels',
     sa.Column('id', sa.Integer(), nullable=False),
