@@ -16,11 +16,11 @@ class Lab(db.Model):
     
     UniqueConstraint("buildingNumber", "roomNumber")
 
-    owner = db.relationship("Profile", back_populates='owned_labs')
+    profiles = db.relationship("Profile", back_populates='labs')
     barrels = db.relationship("Barrel", back_populates='labs', cascade='all, delete-orphan')
 
-def to_dict(self):
-    return {
+    def to_dict(self):
+        return {
         'id': self.id,
         'user_id': self.user_id,
         'buildingNumber': self.buildingNumber,
