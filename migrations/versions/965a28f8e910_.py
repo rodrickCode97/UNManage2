@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ac98d7a015c1
+Revision ID: 965a28f8e910
 Revises: 
-Create Date: 2024-02-06 17:02:24.295517
+Create Date: 2024-02-06 17:40:01.452186
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'ac98d7a015c1'
+revision = '965a28f8e910'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,6 +32,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        
     op.create_table('profiles',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -70,10 +71,10 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE vendors SET SCHEMA {SCHEMA};")
-        
+
     op.create_table('barrels',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('lab_id', sa.Integer(), nullable=True),
+    sa.Column('lab_id', sa.Integer(), nullable=False),
     sa.Column('roomNumber', sa.Integer(), nullable=False),
     sa.Column('buildingNumber', sa.Integer(), nullable=False),
     sa.Column('profileNumber', sa.String(length=25), nullable=False),
@@ -86,7 +87,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE barrels SET SCHEMA {SCHEMA};")    # ### end Alembic commands ###
+        op.execute(f"ALTER TABLE barrels SET SCHEMA {SCHEMA};")
+    # ### end Alembic commands ###
 
 
 def downgrade():

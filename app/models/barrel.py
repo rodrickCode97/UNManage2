@@ -9,7 +9,7 @@ class Barrel(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    lab_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('labs.id')))
+    lab_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('labs.id')), nullable=False)
     roomNumber = db.Column(db.Integer, nullable=False)
     buildingNumber = db.Column(db.Integer, nullable=False)
     profileNumber = db.Column(db.String(25), nullable=False)
