@@ -16,7 +16,7 @@ def seed_barrels():
 
 def undo_barrels():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.barrels RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM barrels"))
         

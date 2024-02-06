@@ -16,7 +16,7 @@ def seed_labs():
 
 def undo_labs():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.labs RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM labs"))
         
