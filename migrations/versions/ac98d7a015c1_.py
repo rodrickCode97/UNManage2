@@ -1,20 +1,19 @@
 """empty message
 
-Revision ID: 2aa98a1f585b
+Revision ID: ac98d7a015c1
 Revises: 
-Create Date: 2024-02-06 16:05:15.388316
+Create Date: 2024-02-06 17:02:24.295517
 
 """
 from alembic import op
 import sqlalchemy as sa
-
-
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+
 # revision identifiers, used by Alembic.
-revision = '2aa98a1f585b'
+revision = 'ac98d7a015c1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -45,6 +44,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE profiles SET SCHEMA {SCHEMA};")
+
     op.create_table('labs',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('profile_id', sa.Integer(), nullable=False),
@@ -56,6 +56,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE labs SET SCHEMA {SCHEMA};")
+
     op.create_table('vendors',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=35), nullable=False),
@@ -67,8 +68,9 @@ def upgrade():
     sa.ForeignKeyConstraint(['contact_id'], ['profiles.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    if  environment == "production":
+    if environment == "production":
         op.execute(f"ALTER TABLE vendors SET SCHEMA {SCHEMA};")
+        
     op.create_table('barrels',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('lab_id', sa.Integer(), nullable=True),
@@ -84,8 +86,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE barrels SET SCHEMA {SCHEMA};")
-    # ### end Alembic commands ###
+        op.execute(f"ALTER TABLE barrels SET SCHEMA {SCHEMA};")    # ### end Alembic commands ###
 
 
 def downgrade():
