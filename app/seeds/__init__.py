@@ -27,11 +27,7 @@ def seed():
         undo_labs()
         undo_profiles()
         undo_users()
-        seed_users()
-        seed_profiles()
-        seed_labs()
-        seed_vendors()
-        
+
     seed_barrels()
     seed_users()
     seed_profiles()
