@@ -40,8 +40,6 @@ def create_barrel(lab_id):
     if form.validate_on_submit():
         print(form.profileNumber.data)
         new_barrel = Barrel( 
-            buildingNumber = form.buildingNumber.data,
-            roomNumber = form.roomNumber.data,
             profileNumber = form.profileNumber.data,
             wasteType = form.wasteType.data,
             wasteCapacity = form.wasteCapacity.data,
