@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 965a28f8e910
+Revision ID: d1b90c805e9d
 Revises: 
-Create Date: 2024-02-06 17:40:01.452186
+Create Date: 2024-02-06 17:54:15.157530
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = '965a28f8e910'
+revision = 'd1b90c805e9d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,7 +32,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        
+
     op.create_table('profiles',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -74,7 +74,7 @@ def upgrade():
 
     op.create_table('barrels',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('lab_id', sa.Integer(), nullable=False),
+    sa.Column('lab', sa.Integer(), nullable=False),
     sa.Column('roomNumber', sa.Integer(), nullable=False),
     sa.Column('buildingNumber', sa.Integer(), nullable=False),
     sa.Column('profileNumber', sa.String(length=25), nullable=False),
@@ -83,7 +83,7 @@ def upgrade():
     sa.Column('is_full', sa.Boolean(), nullable=True),
     sa.Column('createdAt', sa.DateTime(), nullable=True),
     sa.Column('updatedAt', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['lab_id'], ['labs.id'], ),
+    sa.ForeignKeyConstraint(['lab'], ['labs.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
