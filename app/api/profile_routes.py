@@ -14,9 +14,9 @@ profile_routes = Blueprint('profiles', __name__)
 @profile_routes.route('/profiles/dashboard')
 @login_required
 def profile():
-    current_profile = Profile.query.filter(current_user.id == Profile.userID)
-    
-    profile_details = [current_profile.to_dict() for profile in current_profile]
+    current_profile = Profile.query.filter(current_user.id == Profile.user_id)
+        
+    profile_details = [profile.to_dict() for profile in current_profile]
     return jsonify(profile_details), 200
 
 
@@ -31,7 +31,7 @@ def create_profile():
 
 
     if form.validate_on_submit():
-        new_profile = Profile(userId = current_user.id,
+        new_profile = Profile(user_id = current_user.id,
         is_EHS = form.is_EHS.data,
         theme = form.theme.data)
 
@@ -43,10 +43,10 @@ def create_profile():
 
 
 
-@profile_routes.route('/profile/<int:profileId>', methods=['PUT'])
+@profile_routes.route('/profiles/<int:profile_id>', methods=['PUT'])
 @login_required
-def update_profile(profileId):
-    current_profile = Profile.query.filter(current_user.id == profileId)
+def update_profile(profile_id):
+    current_profile = Profile.query.get( profile_id)
      
     form = ProfileForm()
 
@@ -56,7 +56,7 @@ def update_profile(profileId):
         abort(404, {'message': "profile not found"})
 
     if form.validate_on_submit():
-        current_profile.is_EHS = form.is_EHS.data,
+        current_profile.is_EHS = form.is_EHS.data
         current_profile.theme = form.theme.data
 
         db.session.commit()
@@ -68,13 +68,13 @@ def update_profile(profileId):
 
 
 
-@profile_routes.route('/profile/<int:profileId>', methods=['DELETE'])
+@profile_routes.route('/profiles/<int:profile_id>', methods=['DELETE'])
 @login_required
-def delete_profile(profileId):
-    current_profile = Profile.query.filter(current_user.id == profileId)
+def delete_profile(profile_id):
+    current_profile = Profile.query.get(profile_id)
     if not current_profile:
-        return jsonify({'message', 'profile not found'}), 400
+        return jsonify({'message', 'profile not found'}), 404
     
-    db.session.delete(profileId)
+    db.session.delete(current_profile)
     db.session.commit()
     return jsonify({'Message': "successfully deleted!"})

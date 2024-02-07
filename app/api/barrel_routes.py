@@ -12,27 +12,28 @@ barrel_routes = Blueprint('barrels', __name__)
 # current_profile = Profile.filter(current_user.id == Profile.userID)
 
 # ! Read All Barrels in a lab 
-@barrel_routes.route('/labs/<int:labId>/barrels/')
+@barrel_routes.route('/labs/<int:lab_id>/barrels/')
 @login_required
-def barrel(labId):
-    barrels = barrel.query.get(Barrel.labId == labId)
+def barrel(lab_id):
+    barrels = Barrel.query.filter(Barrel.lab == lab_id)
     barrels_details = [barrel.to_dict() for barrel in barrels]
 
     return jsonify(barrels_details), 200
 
-@barrel_routes.route('/labs/<int:labId>/barrels', methods=['POST'])
+@barrel_routes.route('/labs/<int:lab_id>/barrels', methods=['POST'])
 @login_required
-def create_barrel(labId):
-    current_profile = Profile.query.filter(current_user.id == Profile.userID)
-    current_lab = Lab.query.get(labId)
+def create_barrel(lab_id):
+    profiles = Profile.query.filter(current_user.id == Profile.user_id)
+    current_profile = [profile for profile in profiles]
+    current_lab = Lab.query.get(lab_id)
     
     if not current_lab:
-        abort(404, {"message": "Lab not found"})
+        return jsonify({"message": "Lab not found"}), 400
 
-    if not current_profile.is_EHS:
-        return abort(404, {'message': 'action Unauthorized'})
+    if not current_profile[0].is_EHS:
+        return jsonify({'message': 'action Unauthorized'}), 400
     
-    form = barrelForm()
+    form = BarrelForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -52,20 +53,24 @@ def create_barrel(labId):
 
 
 
-@barrel_routes.route('/labs/<int:labId>/barrels/<int:barrelId>', methods=['PUT'])
+@barrel_routes.route('/labs/<int:lab_id>/barrels/<int:barrel_id>', methods=['PUT'])
 @login_required
-def update_barrel(barrelId):
-    current_barrel = Barrel.query.get(barrelId)
-    current_profile = Profile.query.filter(current_user.id == Profile.userID)
+def update_barrel(lab_id, barrel_id):
+    current_barrel = Barrel.query.get(barrel_id)
+    profiles = Profile.query.filter(current_user.id == Profile.user_id)
+    current_profile = [profile for profile in profiles]
     
     if not current_barrel:
-        return abort(404, {'message': 'Barrel not found'})
-    if not current_profile.is_EHS:
-        return jsonify({'message':"Unauthorized action"})
-    
-    form = barrelForm()
+        return jsonify({"message": "Barrel not found"}), 400
 
+    if not current_profile[0].is_EHS:
+        return jsonify({'message': 'action Unauthorized'}), 400
+    
+    form = BarrelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
+
+  
 
     if form.validate_on_submit():
         current_barrel.profileNumber = form.profileNumber.data
@@ -79,17 +84,19 @@ def update_barrel(barrelId):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
     
 
-@barrel_routes.route('/labs/<int:labId>/barrels/<int:barrelId>', methods=['DELETE'])
+@barrel_routes.route('/labs/<int:lab_id>/barrels/<int:barrel_id>', methods=['DELETE'])
 @login_required
-def delete_barrel(barrelId):
-    current_barrel = Barrel.query.get(barrelId)
-    current_profile = Profile.query.filter(current_user.id == Profile.userID)
+def delete_barrel(lab_id, barrel_id):
+    current_barrel = Barrel.query.get(barrel_id)
+    profiles = Profile.query.filter(current_user.id == Profile.user_id)
+    current_profile = [profile for profile in profiles]
 
     if not current_barrel:
-        return abort(404, {'message': 'Barrel not found'})
-    if not current_profile.is_EHS:
-        return jsonify({'message':"Unauthorized action"})
+        return jsonify({"message": "Barrel not found"}), 400
+
+    if not current_profile[0].is_EHS:
+        return jsonify({'message': 'action Unauthorized'}), 400
     
-    db.session.delete(barrelId)
+    db.session.delete(barrel_id)
     db.session.commit()
-    return jsonify({'Message': "succesfully deleted!"})
+    return jsonify({'Message': "successfully deleted!"})
