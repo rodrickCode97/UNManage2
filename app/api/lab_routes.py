@@ -13,11 +13,11 @@ lab_routes = Blueprint('labs', __name__)
 # ! Read All Labs
 @lab_routes.route('/labs')
 @login_required
-def profile():
+def all_labs():
 #    returns every lab in the database
    labs = Lab.query.all()
 #  loop through labs and create a list for all details 
-   lab_details = [labs.to_dict() for lab in labs]
+   lab_details = [lab.to_dict() for lab in labs]
    return jsonify(lab_details), 200
 
 
@@ -25,18 +25,21 @@ def profile():
 @lab_routes.route('/labs', methods=['POST'])
 @login_required
 def create_lab():
-    current_profile = Profile.query.filter(current_user.id == Profile.userID)
+    profiles = Profile.query.filter(current_user.id == Profile.user_id)
+    current_profile = [profile for profile in profiles]
+  
     #  Create new instance of the lab form 
+    
     form = LabForm()
 #  Csrf Token Auth
     form['csrf_token'].data =request.cookies['csrf_token']
-
-    if  not current_profile.is_EHS:
+    print("query", current_profile)
+    if  not current_profile[0].is_EHS:
          return jsonify({'message': "unauthorized"}), 400
 
     if form.validate_on_submit():
         new_lab = Lab(
-        userId = current_user.id,
+        profile_id = current_user.id,
         buildingNumber = form.buildingNumber.data,
         roomNumber = form.roomNumber.data   
         )
@@ -47,18 +50,19 @@ def create_lab():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # ! Update Lab
-@lab_routes.route('/labs/<int:labId>', methods=['PUT'])
+@lab_routes.route('/labs/<int:lab>', methods=['PUT'])
 @login_required
-def update_lab(labId):
-    current_profile = Profile.query.filter(current_user.id == Profile.userID)
-
-    current_lab = Lab.query.get(labId)
+def update_lab(lab):
+    profiles = Profile.query.filter(current_user.id == Profile.user_id)
+    current_profile = [profile for profile in profiles]
+   
+    current_lab = Lab.query.get(lab)
 
     if not current_lab:
-        abort(404, {"message": "Lab not found"})
+        return jsonify({"message": "Lab not found"}), 400
 
-    if  not current_profile.is_EHS:
-        return abort(404, {'message': 'action Unauthorized'})
+    if  not current_profile[0].is_EHS:
+       return jsonify({'message': "unauthorized"}), 400
 
     form = LabForm()
 
@@ -78,15 +82,16 @@ def update_lab(labId):
 @login_required
 def delete_lab(labId):
     current_lab = Lab.query.get(labId)
-    current_profile = Profile.query.filter(current_user.id == Profile.userID)
+    profiles = Profile.query.filter(current_user.id == Profile.user_id)
+    current_profile = [profile for profile in profiles]
 
 
     if not current_lab:
         return jsonify({'message': "Lab not found"}), 400
     
-    if not current_profile.is_EHS:
-        return abort(404, {'message': 'action Unauthorized'})
+    if not current_profile[0].is_EHS:
+        return  jsonify({'message': 'action Unauthorized'}), 400
     
-    db.session.delete(labId)
+    db.session.delete(current_lab)
     db.session.commit()
     return jsonify({'Message': "successfully deleted!"})

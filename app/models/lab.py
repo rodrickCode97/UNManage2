@@ -22,7 +22,7 @@ class Lab(db.Model):
     def to_dict(self):
         return {
         'id': self.id,
-        'user_id': self.user_id,
+        'profile_id': self.profile_id,
         'buildingNumber': self.buildingNumber,
         'roomNumber': self.roomNumber,
         'barrels': [barrel.to_dict() for barrel in self.barrels]

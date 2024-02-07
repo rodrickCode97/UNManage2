@@ -33,17 +33,19 @@ def create_vendor():
     #  Csrf Token Auth
     form['csrf_token'].data =request.cookies['csrf_token']
     #  Grab current profile 
-    current_profile = Profile.query.filter(current_user.id == Profile.userID)
+    profiles = Profile.query.filter(current_user.id == Profile.user_id)
+    current_profile = [profile for profile in profiles]
+    # return jsonify({'current_profile': current_profile[0].to_dict()})
     # if the current profile is not  a part of the EHS group return error
-    if not  current_profile.is_EHS : 
+    if not  current_profile[0].is_EHS : 
         return jsonify({'message': 'unauthorized'}), 400
         # if form has no errors 
     if form.validate_on_submit():
         new_vendor = Vendor(
             name = form.name.data,
-            contact_id = current_profile.userID,
-            phoneNumber = form.phone_number.data,
-            email = form.data.email
+            contact_id = current_profile[0].user_id,
+            phoneNumber = form.phoneNumber.data,
+            email = form.email.data
         )
 
         db.session.add(new_vendor)
@@ -56,26 +58,29 @@ def create_vendor():
     
 
 
-@vendor_routes.route('/vendors/<int:vendorId>', methods=['PUT'])
+@vendor_routes.route('/vendors/<int:vendor_id>', methods=['PUT'])
 @login_required
-def update_vendor(vendorId):
-    current_profile = Profile.filter(current_user.id == Profile.userID)
+def update_vendor(vendor_id):
+    profiles = Profile.query.filter(current_user.id == Profile.user_id)
+    current_profile = [profile for profile in profiles]
+
+  
     
-    current_vendor = Vendor.query.get(vendorId)
+    current_vendor = Vendor.query.get(vendor_id)
 
     if not current_vendor:
-        abort(404, {'message': 'Vendor not found'})
+        jsonify({'message': 'Vendor not found'}),400
 
-    if not current_profile.is_EHS:
+    if not current_profile[0].is_EHS:
         return jsonify({'message': 'unauthorized action'})
     
     form = VendorForm()
 
-    form['csrf_token'].data = request.cookies['csrf-token']
+    form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
         current_vendor.name = form.name.data
-        current_vendor.phone_number = form.phone_number.data
+        current_vendor.phoneNumber = form.phoneNumber.data
         current_vendor.email = form.email.data
 
         db.session.commit()
@@ -86,18 +91,22 @@ def update_vendor(vendorId):
 
 
 
-@vendor_routes.route('/vendors/<int:vendorId>', methods=['DELETE'])
+@vendor_routes.route('/vendors/<int:vendor_id>', methods=['DELETE'])
 @login_required
-def delete_profile(vendorId):
-    current_profile = Profile.query.filter(current_user.id == Profile.userID)
-    current_vendor = Vendor.query.get(vendorId)
+def delete_vendor(vendor_id):
+    profiles = Profile.query.filter(current_user.id == Profile.user_id)
+    current_profile = [profile for profile in profiles]
+
+    # if the current profile is not  a part of the EHS group return error
+
+    current_vendor = Vendor.query.get(vendor_id)
 
     if not current_vendor: 
-        return abort(404, {'message': 'Vendor not Found'})
+        return jsonify({'message': 'Vendor not Found'}), 400
     
-    if not current_profile.is_EHS:
-        return abort(404, {'message': 'action unauthorized'})
+    if not current_profile[0].is_EHS:
+        return jsonify({'message': 'action unauthorized'}), 400
     
-    db.session.delete(vendorId)
+    db.session.delete(current_vendor)
     db.session.commit()
     return jsonify({'Message': "successfully deleted!"})
