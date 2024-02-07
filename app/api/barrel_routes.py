@@ -38,15 +38,18 @@ def create_barrel(lab_id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-      new_barrel = Barrel( 
-          profileNumber = form.ProfileNumber.data,
-          wasteType = form.wasteType.data,
-          wasteCapacity = form.wasteCapacity.data,
-          is_full = False
-                          )
-      db.session.add(new_barrel)
-      db.session.commit()
-      return jsonify(new_barrel.to_dict()), 200
+        print(form.profileNumber.data)
+        new_barrel = Barrel( 
+            buildingNumber = form.buildingNumber.data,
+            roomNumber = form.roomNumber.data,
+            profileNumber = form.profileNumber.data,
+            wasteType = form.wasteType.data,
+            wasteCapacity = form.wasteCapacity.data,
+            is_full = False
+            )
+        db.session.add(new_barrel)
+        db.session.commit()
+        return jsonify(new_barrel.to_dict()), 200
 
     return  {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
@@ -68,9 +71,6 @@ def update_barrel(lab_id, barrel_id):
     
     form = BarrelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
-
-  
 
     if form.validate_on_submit():
         current_barrel.profileNumber = form.profileNumber.data

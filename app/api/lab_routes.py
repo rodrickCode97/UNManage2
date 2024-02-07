@@ -39,7 +39,7 @@ def create_lab():
 
     if form.validate_on_submit():
         new_lab = Lab(
-        user_id = current_user.id,
+        profile_id = current_user.id,
         buildingNumber = form.buildingNumber.data,
         roomNumber = form.roomNumber.data   
         )
