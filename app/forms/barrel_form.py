@@ -3,7 +3,7 @@ from wtforms import StringField, BooleanField, IntegerField
 from wtforms.validators import DataRequired, Length
 
 class BarrelForm(FlaskForm):
-    profileNumber = IntegerField('profileNumber', validators=[DataRequired(), Length(max=25)])
+    profileNumber= StringField('profileNumber', validators=[DataRequired(), Length(max=25)])
     buildingNumber = IntegerField('buildingNumber', validators=[DataRequired()])
     roomNumber = IntegerField('roomNumber', validators=[DataRequired()])
     wasteType = StringField('wasteType', validators=[DataRequired(), Length(max=255)])

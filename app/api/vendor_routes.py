@@ -35,7 +35,7 @@ def create_vendor():
     #  Grab current profile 
     profiles = Profile.query.filter(current_user.id == Profile.user_id)
     current_profile = [profile for profile in profiles]
-
+    # return jsonify({'current_profile': current_profile[0].to_dict()})
     # if the current profile is not  a part of the EHS group return error
     if not  current_profile[0].is_EHS : 
         return jsonify({'message': 'unauthorized'}), 400
@@ -43,9 +43,9 @@ def create_vendor():
     if form.validate_on_submit():
         new_vendor = Vendor(
             name = form.name.data,
-            contact_id = current_profile.user_id,
-            phoneNumber = form.phone_number.data,
-            email = form.data.email
+            contact_id = current_profile[0].user_id,
+            phoneNumber = form.phoneNumber.data,
+            email = form.email.data
         )
 
         db.session.add(new_vendor)
@@ -76,11 +76,11 @@ def update_vendor(vendor_id):
     
     form = VendorForm()
 
-    form['csrf_token'].data = request.cookies['csrf-token']
+    form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
         current_vendor.name = form.name.data
-        current_vendor.phone_number = form.phone_number.data
+        current_vendor.phoneNumber = form.phoneNumber.data
         current_vendor.email = form.email.data
 
         db.session.commit()
@@ -93,7 +93,7 @@ def update_vendor(vendor_id):
 
 @vendor_routes.route('/vendors/<int:vendor_id>', methods=['DELETE'])
 @login_required
-def delete_profile(vendor_id):
+def delete_vendor(vendor_id):
     profiles = Profile.query.filter(current_user.id == Profile.user_id)
     current_profile = [profile for profile in profiles]
 

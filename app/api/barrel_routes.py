@@ -26,6 +26,7 @@ def create_barrel(lab_id):
     profiles = Profile.query.filter(current_user.id == Profile.user_id)
     current_profile = [profile for profile in profiles]
     current_lab = Lab.query.get(lab_id)
+   
     
     if not current_lab:
         return jsonify({"message": "Lab not found"}), 400
@@ -37,10 +38,13 @@ def create_barrel(lab_id):
 
     form['csrf_token'].data = request.cookies['csrf_token']
 
+  
     if form.validate_on_submit():
-        print(form.profileNumber.data)
         new_barrel = Barrel( 
+            lab = current_lab.id,
             profileNumber = form.profileNumber.data,
+            buildingNumber = form.buildingNumber.data,
+            roomNumber = form.roomNumber.data,
             wasteType = form.wasteType.data,
             wasteCapacity = form.wasteCapacity.data,
             is_full = False
@@ -95,6 +99,6 @@ def delete_barrel(lab_id, barrel_id):
     if not current_profile[0].is_EHS:
         return jsonify({'message': 'action Unauthorized'}), 400
     
-    db.session.delete(barrel_id)
+    db.session.delete(current_barrel)
     db.session.commit()
     return jsonify({'Message': "successfully deleted!"})
