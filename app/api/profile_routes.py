@@ -22,6 +22,7 @@ def profile():
 
 # ! Create a Profile
 @profile_routes.route('/profiles', methods=['POST'])
+@login_required
 def create_profile():
     
     form = ProfileForm()
