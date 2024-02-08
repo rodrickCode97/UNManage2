@@ -5,6 +5,11 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import Profile from "./components/Profile";
+import Labs from "./components/Lab";
+import Barrel from "./components/Barrel";
+import Lab from "./components/Lab/labs";
+import Vendors from "./components/Vendor";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +28,19 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route exact path="/profiles/dashboard">
+          <Profile />
+          </Route>
+          <Route exact path='/labs'>
+          <Labs />
+          </Route>
+          <Route exact path='/labs/:id'>
+            <Lab />
+            <Vendors />
+          </Route>
+          <Route exact path="/labs/:id/barrels">
+          <Barrel />
           </Route>
         </Switch>
       )}
