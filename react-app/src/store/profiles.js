@@ -87,7 +87,7 @@ export const deleteProfile = (profile_id) => async (dispatch) => {
         return res;
 }
 
-const initState = { profile: {} };
+const initState = {};
 
 const ProfileReducer = (state = initState, action) => {
     switch (action.type) {
@@ -97,16 +97,16 @@ const ProfileReducer = (state = initState, action) => {
             newObj.lists[id] = action.payload;
             return newObj;
         case READ:
-            console.log(action)
             if (action.type) {
-              return {...state, profiles: {...action.payload}}
+                return {...state, profiles: {...action.payload}}
             } else {
                 return {...state}
             }
-        case UPDATE:
-            const profile_id = action.profile.id;
+            case UPDATE:
+            console.log(action)
+            const profile_id = action.profiles.profiles[0].id;
             const newState = { ...state };
-            newState.profile[profile_id] = action.payload;
+            newState.profiles[profile_id] = action.payload;
             return newState
         case DELETE:
             const new_state = { ...state };

@@ -26,9 +26,9 @@ const deleted = (payload) => ({
     payload
 })
 
-export const createBarrel = (payload) => async (dispatch) => {
+export const createBarrel = (lab_id, payload) => async (dispatch) => {
     try {
-        const res = await fetch(`api/barrels`, {
+        const res = await fetch(`/api/labs/${lab_id}/barrels`, {
             method: "POST",
             Headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
@@ -46,7 +46,7 @@ export const createBarrel = (payload) => async (dispatch) => {
 }
 
 export const readBarrel = (lab_id, payload) => async (dispatch) => {
-    const res = await fetch(`api/${lab_id}/barrels`);
+    const res = await fetch(`/api/labs/${lab_id}/barrels`);
     if (res.ok) {
         const data = await res.json();
         dispatch(read(data));
@@ -57,7 +57,7 @@ export const readBarrel = (lab_id, payload) => async (dispatch) => {
 
 export const updateBarrel = (lab_id, barrel_id, payload) => async (dispatch) => {
     try {
-        const res = await fetch(`api/labs/${lab_id}/barrels/${barrel_id}`, {
+        const res = await fetch(`/api/labs/${lab_id}/barrels/${barrel_id}`, {
             method: "PUT",
             Headers: { 'Content-Type': "application/json" },
             body: JSON.stringify(payload)
@@ -75,7 +75,7 @@ export const updateBarrel = (lab_id, barrel_id, payload) => async (dispatch) => 
 }
 
 export const deleteBarrel = (lab_id, barrel_id) => async (dispatch) => {
-        const res = await fetch(`api/labs/${lab_id}/barrels/${barrel_id}`,{method: "DELETE"});
+        const res = await fetch(`/api/labs/${lab_id}/barrels/${barrel_id}`,{method: "DELETE"});
         if (res.ok) {
             const data = await res.json();
             dispatch(deleted(barrel_id)) //might be data if error
@@ -84,7 +84,7 @@ export const deleteBarrel = (lab_id, barrel_id) => async (dispatch) => {
         return res;
 }
 
-const initState = { barrel: {} };
+const initState = {};
 
 const barrelReducer = (state = initState, action) => {
     switch (action.type) {
@@ -94,23 +94,19 @@ const barrelReducer = (state = initState, action) => {
             newObj.lists[id] = action.payload;
             return newObj;
         case READ:
-            const currBarrel = {};
             if (action.type) {
-                const barrel = action.barrel.barrels;
-                if (!barrel) return { ...state };
-                currBarrel[barrel[0].id] = barrel;
-                return {...state, ...currBarrel}
+                return {...state, barrels: {...action.payload}}
             } else {
-                return {...state, barrel: {...currBarrel}}
+                return {...state}
             }
         case UPDATE:
             const barrel_id = action.barrel.id;
             const newState = { ...state };
-            newState.barrel[barrel_id] = action.payload;
+            newState.barrels[barrel_id] = action.payload;
             return newState
         case DELETE:
             const new_state = { ...state };
-            delete new_state.barrel[action.barrel];
+            delete new_state.barrels[action.barrel];
             return new_state;
         default:
             return state;

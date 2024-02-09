@@ -12,7 +12,7 @@ barrel_routes = Blueprint('barrels', __name__)
 # current_profile = Profile.filter(current_user.id == Profile.userID)
 
 # ! Read All Barrels in a lab 
-@barrel_routes.route('/labs/<int:lab_id>/barrels/')
+@barrel_routes.route('/labs/<int:lab_id>/barrels')
 @login_required
 def barrel(lab_id):
     barrels = Barrel.query.filter(Barrel.lab == lab_id)

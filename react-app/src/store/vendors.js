@@ -84,7 +84,7 @@ export const deleteVendor = (vendor_id) => async (dispatch) => {
         return res;
 }
 
-const initState = { vendor: {} };
+const initState = {};
 
 const vendorReducer = (state = initState, action) => {
     switch (action.type) {
@@ -94,23 +94,20 @@ const vendorReducer = (state = initState, action) => {
             newObj.lists[id] = action.payload;
             return newObj;
         case READ:
-            const currVendor = {};
             if (action.type) {
-                const vendor = action.vendor.vendors;
-                if (!vendor) return { ...state };
-                currVendor[vendor[0].id] = vendor;
-                return {...state, ...currVendor}
+                return {...state, vendors: {...action.payload}}
             } else {
-                return {...state, vendor: {...currVendor}}
+                return {...state}
             }
+          
         case UPDATE:
             const vendor_id = action.vendor.id;
             const newState = { ...state };
-            newState.vendor[vendor_id] = action.payload;
+            newState.vendors[vendor_id] = action.payload;
             return newState
         case DELETE:
             const new_state = { ...state };
-            delete new_state.vendor[action.vendor];
+            delete new_state.vendors[action.vendor];
             return new_state;
         default:
             return state;
