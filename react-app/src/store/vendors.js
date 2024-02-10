@@ -91,7 +91,7 @@ const vendorReducer = (state = initState, action) => {
         case CREATE:
             const id = action.payload.id;
             const newObj = { ...state };
-            newObj.lists[id] = action.payload;
+            newObj.vendors[id] = action.payload;
             return newObj;
         case READ:
             if (action.type) {

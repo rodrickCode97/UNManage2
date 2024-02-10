@@ -4,6 +4,7 @@ import "./profile.css";
 import OpenModalButton from '../OpenModalButton';
 import { useHistory } from 'react-router-dom';
 import { readProfile } from '../../store/profiles';
+import CreateProfileForm from './create';
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -15,7 +16,11 @@ const Profile = () => {
     }, [dispatch])
     
     return (
+        <div>
+            
         <h1>Hello From Profile</h1>
+        <CreateProfileForm />
+        </div>
     )
 }
 export default Profile;

@@ -27,10 +27,11 @@ const deleted = (payload) => ({
 })
 
 export const createProfile = (payload) => async (dispatch) => {
+    console.log(payload)
     try {
         const res = await fetch(`/api/profiles`, {
             method: "POST",
-            Headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
         if (res.ok) {
@@ -91,10 +92,11 @@ const initState = {};
 
 const ProfileReducer = (state = initState, action) => {
     switch (action.type) {
+        
         case CREATE:
             const id = action.payload.id;
             const newObj = { ...state };
-            newObj.lists[id] = action.payload;
+            newObj.profiles[id] = action.payload;
             return newObj;
         case READ:
             if (action.type) {

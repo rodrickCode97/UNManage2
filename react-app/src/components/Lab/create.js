@@ -3,7 +3,7 @@ import { useDispatch, useSelector, } from "react-redux";
 import { readLab, createLab } from "../../store/lab"
 import { useModal } from "../../context/Modal";
 import { useParams } from "react-router-dom";
-import "./barrel.css";
+import "./lab.css";
 
 const CreateLabForm = () => {
     const dispatch = useDispatch();
@@ -27,15 +27,15 @@ const CreateLabForm = () => {
 
     //payload
     const payload = {
-        buildingNumber,
-        roomNumber
+        buildingNumber: parseInt(buildingNumber),
+        roomNumber: parseInt(roomNumber)
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({})
         try {
-            await dispatch(createLab(lab_id, payload)).then(() => dispatch(readLab(lab_id))).then(() => closeModal());
+            await dispatch(createLab(payload)).then(() => dispatch(readLab())).then(() => closeModal());
         } catch (data) {
             setErrors({ ...data });
         }

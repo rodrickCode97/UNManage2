@@ -28,9 +28,10 @@ const deleted = (payload) => ({
 
 export const createLab = (payload) => async (dispatch) => {
     try {
+        console.log(payload)
         const res = await fetch(`/api/labs`, {
             method: "POST",
-            Headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
         if (res.ok) {
@@ -91,7 +92,7 @@ const labReducer = (state = initState, action) => {
         case CREATE:
             const id = action.payload.id;
             const newObj = { ...state };
-            newObj.lists[id] = action.payload;
+            newObj.labs[id] = action.payload;
             return newObj;
         case READ:
             const currLab = {};

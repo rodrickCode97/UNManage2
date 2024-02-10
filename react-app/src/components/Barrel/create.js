@@ -5,7 +5,7 @@ import { useModal } from "../../context/Modal";
 import { useParams } from "react-router-dom";
 import "./barrel.css";
 
-const CreateBarrel = () => {
+const CreateBarrelForm = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const lab_id = parseInt(id)
@@ -31,16 +31,17 @@ const CreateBarrel = () => {
     //payload
     const payload = {
         profileNumber,
-        buildingNumber,
-        roomNumber,
+        buildingNumber: parseInt(buildingNumber),
+        roomNumber: parseInt(roomNumber),
         wasteType,
-        wasteCapacity,
+        wasteCapacity: parseInt(wasteCapacity),
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({})
         try {
+            console.log(lab_id)
             await dispatch(createBarrel(lab_id, payload)).then(() => dispatch(readBarrel(lab_id))).then(() => closeModal());
         } catch (data) {
             setErrors({ ...data });
@@ -116,4 +117,4 @@ const CreateBarrel = () => {
 
 } 
 
-export default CreateBarrel;
+export default CreateBarrelForm;

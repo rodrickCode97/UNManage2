@@ -3,13 +3,13 @@ import { useDispatch} from "react-redux";
 import { createProfile, readProfile } from '../../store/profiles';
 import { useModal } from "../../context/Modal";
 
-import "./barrel.css";
+import "./profile.css";
 
 const CreateProfileForm = () => {
     const dispatch = useDispatch();
 
     //state 
-    const [isEHS, setIsEHS] = useState('');
+    const [isEHS, setIsEHS] = useState();
     const [theme, setTheme] = useState();
   
     const [errors, setErrors] = useState('')
@@ -22,7 +22,7 @@ const CreateProfileForm = () => {
 
     //payload
     const payload = {
-        isEHS,
+        is_EHS: parseInt(isEHS),
         theme
     }
 
@@ -45,16 +45,19 @@ const CreateProfileForm = () => {
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="barrel_form_container">
-				{errors && <p>{errors.errors}</p>}
-				<input
-					className="profile_form_input"
-					type="text"
-					value={isEHS}
-					onChange={handleIsEHS}
-					name="EHS"
-					placeholder="Enter if your EHS... ex. yes"
-					required
-                />
+                {errors && <p>{errors.errors}</p>}
+        <label>
+            Are You EHS? 
+        <input type="radio" name="EHS" id="True" value={parseInt(1)} onChange={handleIsEHS} />
+                    <label for='True'>
+                    Yes
+                    </label>
+
+                    <input type="radio" name="EHS" id="False" value={parseInt(0)} onChange={handleIsEHS} />
+                    <label for='False'>
+                    No
+                    </label>
+        </label>
                 <input
 					className="profile_form_input"
 					type="text"

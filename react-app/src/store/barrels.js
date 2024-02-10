@@ -28,9 +28,10 @@ const deleted = (payload) => ({
 
 export const createBarrel = (lab_id, payload) => async (dispatch) => {
     try {
-        const res = await fetch(`/api/labs/${lab_id}/barrels`, {
+        console.log(lab_id, payload)
+        const res = await fetch(`/api/labs/${lab_id}/barrels` , {
             method: "POST",
-            Headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
         if (res.ok) {
@@ -59,7 +60,7 @@ export const updateBarrel = (lab_id, barrel_id, payload) => async (dispatch) => 
     try {
         const res = await fetch(`/api/labs/${lab_id}/barrels/${barrel_id}`, {
             method: "PUT",
-            Headers: { 'Content-Type': "application/json" },
+            headers: { 'Content-Type': "application/json" },
             body: JSON.stringify(payload)
         });
         if (res.ok) {
@@ -91,7 +92,7 @@ const barrelReducer = (state = initState, action) => {
         case CREATE:
             const id = action.payload.id;
             const newObj = { ...state };
-            newObj.lists[id] = action.payload;
+            newObj.barrels[id] = action.payload;
             return newObj;
         case READ:
             if (action.type) {
