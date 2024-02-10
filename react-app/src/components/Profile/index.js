@@ -5,6 +5,8 @@ import OpenModalButton from '../OpenModalButton';
 import { useHistory } from 'react-router-dom';
 import { readProfile } from '../../store/profiles';
 import CreateProfileForm from './create';
+import CreateVendorForm from '../Vendor/create';
+import UpdateVendorForm from '../Vendor/update';
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -19,7 +21,7 @@ const Profile = () => {
         <div>
             
         <h1>Hello From Profile</h1>
-        <CreateProfileForm />
+            <CreateProfileForm />
         </div>
     )
 }

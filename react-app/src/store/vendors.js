@@ -28,9 +28,9 @@ const deleted = (payload) => ({
 
 export const createVendor = (payload) => async (dispatch) => {
     try {
-        const res = await fetch(`api/vendors`, {
+        const res = await fetch(`/api/vendors`, {
             method: "POST",
-            Headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
         if (res.ok) {
@@ -46,7 +46,7 @@ export const createVendor = (payload) => async (dispatch) => {
 }
 
 export const readVendor = (payload) => async (dispatch) => {
-    const res = await fetch(`api/vendors`);
+    const res = await fetch(`/api/vendors`);
     if (res.ok) {
         const data = await res.json();
         dispatch(read(data));
@@ -57,9 +57,9 @@ export const readVendor = (payload) => async (dispatch) => {
 
 export const updateVendor = (vendor_id, payload) => async (dispatch) => {
     try {
-        const res = await fetch(`api/vendors/${vendor_id}`, {
+        const res = await fetch(`/api/vendors/${vendor_id}`, {
             method: "PUT",
-            Headers: { 'Content-Type': "application/json" },
+            headers: { 'Content-Type': "application/json" },
             body: JSON.stringify(payload)
         });
         if (res.ok) {
@@ -75,7 +75,7 @@ export const updateVendor = (vendor_id, payload) => async (dispatch) => {
 }
 
 export const deleteVendor = (vendor_id) => async (dispatch) => {
-        const res = await fetch(`api/vendors/${vendor_id}`,{method: "DELETE"});
+        const res = await fetch(`/api/vendors/${vendor_id}`,{method: "DELETE"});
         if (res.ok) {
             const data = await res.json();
             dispatch(deleted(vendor_id)) //might be data if error
@@ -101,13 +101,13 @@ const vendorReducer = (state = initState, action) => {
             }
           
         case UPDATE:
-            const vendor_id = action.vendor.id;
+            const vendor_id = action.payload.id
             const newState = { ...state };
             newState.vendors[vendor_id] = action.payload;
             return newState
         case DELETE:
             const new_state = { ...state };
-            delete new_state.vendors[action.vendor];
+            delete new_state.vendors[action.vendor_id];
             return new_state;
         default:
             return state;

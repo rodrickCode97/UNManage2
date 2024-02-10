@@ -5,7 +5,7 @@ import { useModal } from "../../context/Modal";
 
 import "./vendor.css";
 
-const CreateVendor = () => {
+const CreateVendorForm = () => {
     const dispatch = useDispatch();
     //state 
     const [name, setName] = useState('');
@@ -87,4 +87,4 @@ const CreateVendor = () => {
 
 } 
 
-export default CreateVendor;
+export default CreateVendorForm;

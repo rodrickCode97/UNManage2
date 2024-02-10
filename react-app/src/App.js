@@ -10,6 +10,7 @@ import Labs from "./components/Lab";
 import Barrel from "./components/Barrel";
 import Lab from "./components/Lab/labs";
 import Vendors from "./components/Vendor";
+import UpdateVendorForm from "./components/Vendor/update";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route exact path="/labs/:id/barrels">
           <Barrel />
+          </Route>
+          <Route exact path="/vendors/:id">
+            <UpdateVendorForm />
           </Route>
         </Switch>
       )}
