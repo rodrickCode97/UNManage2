@@ -7,6 +7,7 @@ import { readProfile } from '../../store/profiles';
 import CreateProfileForm from './create';
 import CreateVendorForm from '../Vendor/create';
 import UpdateVendorForm from '../Vendor/update';
+import UpdateProfileForm from './update';
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const Profile = () => {
         <div>
             
         <h1>Hello From Profile</h1>
-            <CreateProfileForm />
+           
         </div>
     )
 }

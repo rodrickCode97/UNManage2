@@ -61,9 +61,9 @@ export const readProfile = () => async (dispatch) => {
 
 export const updateProfile = (profile_id, payload) => async (dispatch) => {
     try {
-        const res = await fetch(`api/profiles/${profile_id}`, {
+        const res = await fetch(`/api/profiles/${profile_id}`, {
             method: "PUT",
-            Headers: { 'Content-Type': "application/json" },
+            headers: { 'Content-Type': "application/json" },
             body: JSON.stringify(payload)
         });
         if (res.ok) {
@@ -79,7 +79,7 @@ export const updateProfile = (profile_id, payload) => async (dispatch) => {
 }
 
 export const deleteProfile = (profile_id) => async (dispatch) => {
-        const res = await fetch(`api/profiles/${profile_id}`,{method: "DELETE"});
+        const res = await fetch(`/api/profiles/${profile_id}`,{method: "DELETE"});
         if (res.ok) {
             const data = await res.json();
             dispatch(deleted(profile_id)) //might be data if error
@@ -105,10 +105,9 @@ const ProfileReducer = (state = initState, action) => {
                 return {...state}
             }
             case UPDATE:
-            console.log(action)
-            const profile_id = action.profiles.profiles[0].id;
+            const profile_id = action.payload.id;
             const newState = { ...state };
-            newState.profiles[profile_id] = action.payload;
+            newState.profiles[profile_id -1] = action.payload;
             return newState
         case DELETE:
             const new_state = { ...state };

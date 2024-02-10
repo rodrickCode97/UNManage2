@@ -46,7 +46,7 @@ export const createBarrel = (lab_id, payload) => async (dispatch) => {
 }
 }
 
-export const readBarrel = (lab_id, payload) => async (dispatch) => {
+export const readBarrel = (lab_id) => async (dispatch) => {
     const res = await fetch(`/api/labs/${lab_id}/barrels`);
     if (res.ok) {
         const data = await res.json();
@@ -101,7 +101,7 @@ const barrelReducer = (state = initState, action) => {
                 return {...state}
             }
         case UPDATE:
-            const barrel_id = action.barrel.id;
+            const barrel_id = action.payload.id;
             const newState = { ...state };
             newState.barrels[barrel_id] = action.payload;
             return newState

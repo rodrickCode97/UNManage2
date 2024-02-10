@@ -58,9 +58,10 @@ export const readLab = (payload) => async (dispatch) => {
 
 export const updateLab = (lab_id, payload) => async (dispatch) => {
     try {
+        console.log(payload)
         const res = await fetch(`/api/labs/${lab_id}`, {
             method: "PUT",
-            Headers: { 'Content-Type': "application/json" },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
         if (res.ok) {
@@ -105,9 +106,9 @@ const labReducer = (state = initState, action) => {
                 return {...state, lab: {...currLab}}
             }
         case UPDATE:
-            const lab_id = action.lab.id;
+            const lab_id = action.payload.id;
             const newState = { ...state };
-            newState.lab[lab_id] = action.payload;
+            newState.labs[lab_id] = action.payload;
             return newState
         case DELETE:
             const new_state = { ...state };
