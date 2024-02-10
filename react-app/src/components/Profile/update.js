@@ -10,7 +10,7 @@ const UpdateProfileForm = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const profile_id = parseInt(id)
-    console.log(profile_id)
+  
 
     //state 
     const [isEHS, setIsEHS] = useState();

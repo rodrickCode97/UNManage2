@@ -11,11 +11,10 @@ const CreateLabForm = () => {
     const lab_id = parseInt(id)
 
     //state 
-    const [profileNumber, setProfileNumber] = useState('');
+  
     const [buildingNumber, setBuildingNumber] = useState();
     const [roomNumber, setRoomNumber] = useState();
-    const [wasteType, setWasteType] = useState();
-    const [wasteCapacity, setWasteCapacity] = useState();
+  
     const [errors, setErrors] = useState('')
     const { closeModal } = useModal();
     

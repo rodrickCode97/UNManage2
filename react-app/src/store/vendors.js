@@ -107,7 +107,7 @@ const vendorReducer = (state = initState, action) => {
             return newState
         case DELETE:
             const new_state = { ...state };
-            delete new_state.vendors[action.vendor_id];
+            delete new_state.vendors[action.payload];
             return new_state;
         default:
             return state;

@@ -98,7 +98,6 @@ const labReducer = (state = initState, action) => {
         case READ:
             const currLab = {};
             if (action.type) {
-                console.log(action)
                 const lab = action.payload;
                 if (!lab) return { ...state };
                 return {...state, labs: {...action.payload} }
@@ -111,8 +110,9 @@ const labReducer = (state = initState, action) => {
             newState.labs[lab_id] = action.payload;
             return newState
         case DELETE:
+            console.log(action)
             const new_state = { ...state };
-            delete new_state.lab[action.lab];
+            delete new_state.labs[action.payload];
             return new_state;
         default:
             return state;

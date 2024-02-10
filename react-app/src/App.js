@@ -17,12 +17,18 @@ import UpdateVendorForm from "./components/Vendor/update";
 import UpdateProfileForm from "./components/Profile/update";
 import UpdateLabForm from "./components/Lab/update";
 import UpdateBarrelForm from "./components/Barrel/update";
+import DeleteProfile from "./components/Profile/delete";
+import CreateProfileForm from "./components/Profile/create";
+import DeleteLab from "./components/Lab/delete";
+import DeleteLabButton from "./components/Lab/delete";
+import DeleteBarrelButton from "./components/Barrel/delete";
+import DeleteVendorButton from "./components/Vendor/delete";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    dispatch(authenticate()).then(dispatch(readProfile())).then(() => setIsLoaded(true));
+    dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
@@ -37,16 +43,19 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route exact path="/profiles/dashboard">
+            <CreateProfileForm />
           <Profile />
           </Route>
           <Route exact path='/profiles/:id'>
             <UpdateProfileForm />
+            <DeleteProfile />
           </Route>
           <Route exact path='/labs'>
-          <Labs />
+            <Labs />
           </Route>
           <Route exact path='/labs/:id'>
             <UpdateLabForm />
+            <DeleteLabButton />
             <Vendors />
           </Route>
           <Route exact path="/labs/:id/barrels">
@@ -54,9 +63,11 @@ function App() {
           </Route>
           <Route exact path="/labs/:lab_id/barrels/:barrel_id">
             <UpdateBarrelForm />
+            <DeleteBarrelButton />
           </Route>
           <Route exact path="/vendors/:id">
             <UpdateVendorForm />
+            <DeleteVendorButton />
           </Route>
         </Switch>
       )}

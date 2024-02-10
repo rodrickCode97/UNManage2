@@ -79,9 +79,11 @@ export const updateProfile = (profile_id, payload) => async (dispatch) => {
 }
 
 export const deleteProfile = (profile_id) => async (dispatch) => {
+    console.log(profile_id)
         const res = await fetch(`/api/profiles/${profile_id}`,{method: "DELETE"});
         if (res.ok) {
             const data = await res.json();
+            console.log(data, profile_id)
             dispatch(deleted(profile_id)) //might be data if error
             return data
         }
@@ -111,7 +113,7 @@ const ProfileReducer = (state = initState, action) => {
             return newState
         case DELETE:
             const new_state = { ...state };
-            delete new_state.profile[action.profile];
+            delete new_state.profiles[0];
             return new_state;
         default:
             return state;

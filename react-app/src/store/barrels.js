@@ -107,7 +107,7 @@ const barrelReducer = (state = initState, action) => {
             return newState
         case DELETE:
             const new_state = { ...state };
-            delete new_state.barrels[action.barrel];
+            delete new_state.barrels[action.payload];
             return new_state;
         default:
             return state;
