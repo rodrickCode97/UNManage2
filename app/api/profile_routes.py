@@ -11,7 +11,7 @@ profile_routes = Blueprint('profiles', __name__)
 
 
 #! Read Profile
-@profile_routes.route('/profiles/dashboard')
+@profile_routes.route('/profiles')
 @login_required
 def profile():
     current_profile = Profile.query.filter(current_user.id == Profile.user_id)

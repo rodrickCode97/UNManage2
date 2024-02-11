@@ -4,12 +4,28 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
+import { readProfile } from "./store/profiles";
+import { readLab } from "./store/lab";
+import { readBarrel } from "./store/barrels";
 import Navigation from "./components/Navigation";
 import Profile from "./components/Profile";
 import Labs from "./components/Lab";
 import Barrel from "./components/Barrel";
 import Lab from "./components/Lab/labs";
 import Vendors from "./components/Vendor";
+import UpdateVendorForm from "./components/Vendor/update";
+import UpdateProfileForm from "./components/Profile/update";
+import UpdateLabForm from "./components/Lab/update";
+import UpdateBarrelForm from "./components/Barrel/update";
+import DeleteProfile from "./components/Profile/delete";
+import CreateProfileForm from "./components/Profile/create";
+import DeleteLab from "./components/Lab/delete";
+import DeleteLabButton from "./components/Lab/delete";
+import DeleteBarrelButton from "./components/Barrel/delete";
+import DeleteVendorButton from "./components/Vendor/delete";
+import CreateVendorForm from "./components/Vendor/create";
+import CreateBarrelForm from "./components/Barrel/create";
+import CreateLabForm from "./components/Lab/create";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,17 +46,34 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route exact path="/profiles/dashboard">
+            <CreateProfileForm />
           <Profile />
           </Route>
+          <Route exact path='/profiles/:id'>
+            <UpdateProfileForm />
+            <DeleteProfile />
+          </Route>
           <Route exact path='/labs'>
-          <Labs />
+            <Labs />
           </Route>
           <Route exact path='/labs/:id'>
-            <Lab />
+            <UpdateLabForm />
+            <DeleteLabButton />
             <Vendors />
           </Route>
           <Route exact path="/labs/:id/barrels">
           <Barrel />
+          </Route>
+          <Route exact path="/labs/:lab_id/barrels/:barrel_id">
+            <UpdateBarrelForm />
+            <DeleteBarrelButton />
+          </Route>
+          <Route exact path="/vendors">
+            <CreateVendorForm />
+          </Route>
+          <Route exact path="/vendors/:id">
+            <UpdateVendorForm />
+            <DeleteVendorButton />
           </Route>
         </Switch>
       )}

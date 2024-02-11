@@ -19,6 +19,7 @@ class Lab(db.Model):
     profiles = db.relationship("Profile", back_populates='labs')
     barrels = db.relationship("Barrel", back_populates='labs', cascade='all, delete-orphan')
 
+
     def to_dict(self):
         return {
         'id': self.id,
