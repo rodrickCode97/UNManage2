@@ -62,10 +62,7 @@ def create_vendor():
 @login_required
 def update_vendor(vendor_id):
     profiles = Profile.query.filter(current_user.id == Profile.user_id)
-    current_profile = [profile for profile in profiles]
-
-  
-    
+    current_profile = [profile for profile in profiles]  
     current_vendor = Vendor.query.get(vendor_id)
 
     if not current_vendor:

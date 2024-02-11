@@ -27,8 +27,6 @@ class Barrel(db.Model):
         return {
             'id': self.id,
             'lab': self.lab,
-            'roomNumber': self.roomNumber,
-            'buildingNumber': self.buildingNumber,
             'profileNumber': self.profileNumber,
             'wasteType': self.wasteType,
             'wasteCapacity': self.wasteCapacity,

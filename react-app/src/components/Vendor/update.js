@@ -37,6 +37,7 @@ const UpdateVendorForm = () => {
             await dispatch(updateVendor(parseInt(id), payload)).then(() => dispatch(readVendor())).then(() => closeModal());
         } catch (data) {
             setErrors({ ...data });
+            console.log(errors)
         }
         setName('')
         setPhoneNumber('')

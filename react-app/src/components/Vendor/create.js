@@ -35,6 +35,7 @@ const CreateVendorForm = () => {
             await dispatch(createVendor(payload)).then(() => dispatch(readVendor())).then(() => closeModal());
         } catch (data) {
             setErrors({ ...data });
+            console.log(errors)
         }
         setName('')
         setPhoneNumber('')
