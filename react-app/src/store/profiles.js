@@ -113,7 +113,7 @@ const ProfileReducer = (state = initState, action) => {
             return newState
         case DELETE:
             const new_state = { ...state };
-            delete new_state.profiles[0];
+            delete new_state.profiles[action.payload];
             return new_state;
         default:
             return state;
