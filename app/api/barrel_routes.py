@@ -43,8 +43,6 @@ def create_barrel(lab_id):
         new_barrel = Barrel( 
             lab = current_lab.id,
             profileNumber = form.profileNumber.data,
-            buildingNumber = form.buildingNumber.data,
-            roomNumber = form.roomNumber.data,
             wasteType = form.wasteType.data,
             wasteCapacity = form.wasteCapacity.data,
             is_full = False

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: d1b90c805e9d
+Revision ID: 238eca64dba1
 Revises: 
-Create Date: 2024-02-06 17:54:15.157530
+Create Date: 2024-02-11 15:08:00.769561
 
 """
 from alembic import op
@@ -12,8 +12,9 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 
+
 # revision identifiers, used by Alembic.
-revision = 'd1b90c805e9d'
+revision = '238eca64dba1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -41,7 +42,8 @@ def upgrade():
     sa.Column('createdAt', sa.DateTime(), nullable=True),
     sa.Column('updatedAt', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('user_id')
     )
     if environment == "production":
         op.execute(f"ALTER TABLE profiles SET SCHEMA {SCHEMA};")
@@ -75,10 +77,8 @@ def upgrade():
     op.create_table('barrels',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('lab', sa.Integer(), nullable=False),
-    sa.Column('roomNumber', sa.Integer(), nullable=False),
-    sa.Column('buildingNumber', sa.Integer(), nullable=False),
     sa.Column('profileNumber', sa.String(length=25), nullable=False),
-    sa.Column('wasteType', sa.String(length=255), nullable=False),
+    sa.Column('wasteType', sa.String(length=25), nullable=False),
     sa.Column('wasteCapacity', sa.Integer(), nullable=False),
     sa.Column('is_full', sa.Boolean(), nullable=True),
     sa.Column('createdAt', sa.DateTime(), nullable=True),
@@ -88,6 +88,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE barrels SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 
