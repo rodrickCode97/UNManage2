@@ -15,7 +15,7 @@ const CreateLabForm = () => {
     const [buildingNumber, setBuildingNumber] = useState();
     const [roomNumber, setRoomNumber] = useState();
   
-    const [errors, setErrors] = useState('')
+    const [errors, setErrors] = useState({})
     const { closeModal } = useModal();
     
     // handles
@@ -37,6 +37,8 @@ const CreateLabForm = () => {
             await dispatch(createLab(payload)).then(() => dispatch(readLab())).then(() => closeModal());
         } catch (data) {
             setErrors({ ...data });
+            console.log(data)
+          
         }
         setBuildingNumber('')
         setRoomNumber('')
@@ -46,7 +48,7 @@ const CreateLabForm = () => {
 
     useEffect(() => {
         dispatch(readLab())
-    }, [dispatch, lab_id])
+    }, [dispatch])
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="barrel_form_container">

@@ -33,9 +33,8 @@ def create_lab():
     form = LabForm()
 #  Csrf Token Auth
     form['csrf_token'].data =request.cookies['csrf_token']
-    print("query", current_profile)
     if  not current_profile[0].is_EHS:
-         return jsonify({'message': "unauthorized"}), 400
+         return jsonify({'errors': "unauthorized"}), 400
 
     if form.validate_on_submit():
         new_lab = Lab(

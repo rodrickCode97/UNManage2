@@ -34,14 +34,18 @@ export const createLab = (payload) => async (dispatch) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
+        // if (res.status >= 400) {
+        //     const res = await res.json();
+        //     console.log(res)
+        // }
         if (res.ok) {
             const data = await res.json();
             dispatch(create(data));
             return data;
         }
-        return res;
+        throw res;
     } catch (error) {
-        const res = await error.json();
+        const res  = await error.json();
         throw res;
 }
 }
@@ -64,6 +68,7 @@ export const updateLab = (lab_id, payload) => async (dispatch) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
+        if (res.status >= 400) throw res;
         if (res.ok) {
             const data = await res.json();
             dispatch(update(data))
