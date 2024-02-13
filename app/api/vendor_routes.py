@@ -69,7 +69,7 @@ def update_vendor(vendor_id):
         jsonify({'message': 'Vendor not found'}),400
 
     if not current_profile[0].is_EHS:
-        return jsonify({'message': 'unauthorized action'})
+        return jsonify({'message': 'unauthorized action'}), 400
     
     form = VendorForm()
 
@@ -83,7 +83,7 @@ def update_vendor(vendor_id):
         db.session.commit()
         return jsonify(current_vendor.to_dict()), 200
     
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
     
 
 

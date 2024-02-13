@@ -48,10 +48,9 @@ const UpdateBarrelForm = () => {
             await dispatch(updateBarrel(labId, barrel_id, payload)).then(() => dispatch(readBarrel(lab_id))).then(() => closeModal());
         } catch (data) {
             setErrors({ ...data });
+            console.log(data)
         }
         setProfileNumber('')
-        setBuildingNumber('')
-        setRoomNumber('')
         setWasteType('')
         setWasteCapacity('')
 
@@ -71,24 +70,6 @@ const UpdateBarrelForm = () => {
 					onChange={handleProfileNumber}
 					name="profileNumber"
 					placeholder="Enter Profile Number... ex. UN1993"
-					required
-                />
-                <input
-					className="barrel_form_input"
-					type="text"
-					value={buildingNumber}
-					onChange={handleBuildingNumber}
-					name="BuildingNumber"
-					placeholder="Enter Building Number... ex. 7"
-					required
-                />
-                <input
-					className="barrel_form_input"
-					type="text"
-					value={roomNumber}
-					onChange={handleRoomNumber}
-					name="RoomNumber"
-					placeholder="Enter Room Number... ex. 19"
 					required
                 />
                 <input

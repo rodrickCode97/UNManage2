@@ -22,8 +22,6 @@ const CreateBarrelForm = () => {
     // handles
 
     const handleProfileNumber = (e) => setProfileNumber(e.target.value)
-    const handleBuildingNumber = (e) => setBuildingNumber(e.target.value)
-    const handleRoomNumber = (e) => setRoomNumber(e.target.value)
     const handleWasteType= (e) => setWasteType(e.target.value)
     const handleWasteCapacity = (e) => setWasteCapacity(e.target.value)
    
@@ -31,8 +29,6 @@ const CreateBarrelForm = () => {
     //payload
     const payload = {
         profileNumber,
-        buildingNumber: parseInt(buildingNumber),
-        roomNumber: parseInt(roomNumber),
         wasteType,
         wasteCapacity: parseInt(wasteCapacity),
     }
@@ -41,14 +37,11 @@ const CreateBarrelForm = () => {
         e.preventDefault();
         setErrors({})
         try {
-            console.log(lab_id)
-            await dispatch(createBarrel(lab_id, payload)).then(() => dispatch(readBarrel(lab_id))).then(() => closeModal());
+            await dispatch(createBarrel(lab_id, payload)).then(() => dispatch(readBarrel(lab_id)));
         } catch (data) {
-            setErrors({ ...data });
+            setErrors({ ...data })
         }
         setProfileNumber('')
-        setBuildingNumber('')
-        setRoomNumber('')
         setWasteType('')
         setWasteCapacity('')
 
@@ -68,24 +61,6 @@ const CreateBarrelForm = () => {
 					onChange={handleProfileNumber}
 					name="profileNumber"
 					placeholder="Enter Profile Number... ex. UN1993"
-					required
-                />
-                <input
-					className="barrel_form_input"
-					type="text"
-					value={buildingNumber}
-					onChange={handleBuildingNumber}
-					name="BuildingNumber"
-					placeholder="Enter Building Number... ex. 7"
-					required
-                />
-                <input
-					className="barrel_form_input"
-					type="text"
-					value={roomNumber}
-					onChange={handleRoomNumber}
-					name="RoomNumber"
-					placeholder="Enter Room Number... ex. 19"
 					required
                 />
                 <input

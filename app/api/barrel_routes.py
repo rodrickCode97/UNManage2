@@ -29,10 +29,10 @@ def create_barrel(lab_id):
    
     
     if not current_lab:
-        return jsonify({"message": "Lab not found"}), 400
+        return jsonify({"errors": "Lab not found"}), 400
 
     if not current_profile[0].is_EHS:
-        return jsonify({'message': 'action Unauthorized'}), 400
+        return jsonify({'errors': 'action Unauthorized'}), 400
     
     form = BarrelForm()
 
@@ -64,10 +64,10 @@ def update_barrel(lab_id, barrel_id):
     current_profile = [profile for profile in profiles]
     
     if not current_barrel:
-        return jsonify({"message": "Barrel not found"}), 400
+        return jsonify({"errors": "Barrel not found"}), 400
 
     if not current_profile[0].is_EHS:
-        return jsonify({'message': 'action Unauthorized'}), 400
+        return jsonify({'errors': 'action Unauthorized'}), 400
     
     form = BarrelForm()
     form['csrf_token'].data = request.cookies['csrf_token']

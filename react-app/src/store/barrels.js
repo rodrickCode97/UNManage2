@@ -28,18 +28,19 @@ const deleted = (payload) => ({
 
 export const createBarrel = (lab_id, payload) => async (dispatch) => {
     try {
-        console.log(lab_id, payload)
+     
         const res = await fetch(`/api/labs/${lab_id}/barrels` , {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
+        if (res.status >= 400) throw res;
         if (res.ok) {
             const data = await res.json();
             dispatch(create(data));
             return data;
         }
-        return res;
+        throw res;
     } catch (error) {
         const res = await error.json();
         throw res;
@@ -68,7 +69,7 @@ export const updateBarrel = (lab_id, barrel_id, payload) => async (dispatch) => 
             dispatch(update(data))
             return data
         }
-        return res;
+        throw res;
     } catch (error) {
         const res = await error.json();
         throw res;
