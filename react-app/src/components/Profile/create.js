@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { createProfile, readProfile } from '../../store/profiles';
 import { useModal } from "../../context/Modal";
 
@@ -7,6 +7,9 @@ import "./profile.css";
 
 const CreateProfileForm = () => {
     const dispatch = useDispatch();
+    const profile = useSelector(state => state.profiles.profiles[0])
+    console.log(profile)
+    
 
     //state 
     const [isEHS, setIsEHS] = useState();
@@ -29,6 +32,7 @@ const CreateProfileForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({})
+        if(profile) setErrors({errors: "A profile for this user already exists"})
         try {
             await dispatch(createProfile(payload)).then(() => dispatch(readProfile())).then(() => closeModal());
         } catch (data) {
@@ -39,9 +43,10 @@ const CreateProfileForm = () => {
 
     };
 
-    useEffect(() => {
-        dispatch(readProfile())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(readProfile())
+    // }, [dispatch])
+    
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="barrel_form_container">

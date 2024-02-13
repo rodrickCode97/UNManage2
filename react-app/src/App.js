@@ -31,7 +31,7 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    dispatch(authenticate()).then(() => setIsLoaded(true));
+    dispatch(authenticate()).then(() => dispatch(readProfile())).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (

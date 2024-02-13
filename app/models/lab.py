@@ -5,9 +5,6 @@ from sqlalchemy import UniqueConstraint
 class Lab(db.Model):
     __tablename__ = 'labs'
 
-    __table_args__ = (
-         db.UniqueConstraint('buildingNumber', 'roomNumber'),
-    )
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}

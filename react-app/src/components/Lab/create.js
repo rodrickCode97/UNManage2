@@ -37,7 +37,6 @@ const CreateLabForm = () => {
             await dispatch(createLab(payload)).then(() => dispatch(readLab())).then(() => closeModal());
         } catch (data) {
             setErrors({ ...data });
-            console.log(data)
           
         }
         setBuildingNumber('')

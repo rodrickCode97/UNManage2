@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, IntegerField
+from wtforms import StringField, BooleanField, IntegerField, ValidationError
 from wtforms.validators import DataRequired, Length
+
 
 class BarrelForm(FlaskForm):
     profileNumber= StringField('profileNumber', validators=[DataRequired(), Length(max=25)])
