@@ -11,7 +11,7 @@ class Profile(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False, unique=True)  
     # !still need to update table to make unique constraint show 
     is_EHS = db.Column(db.Boolean)
-    theme = db.Column(db.String(255))
+    theme = db.Column(db.String(25))
     createdAt = db.Column(db.DateTime, default=datetime.now)
     updatedAt = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 

@@ -5,6 +5,10 @@ from sqlalchemy import UniqueConstraint
 class Lab(db.Model):
     __tablename__ = 'labs'
 
+    __table_args__ = (
+         db.UniqueConstraint('buildingNumber', 'roomNumber'),
+    )
+
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
@@ -13,8 +17,6 @@ class Lab(db.Model):
     buildingNumber = db.Column(db.Integer)
     roomNumber = db.Column(db.Integer)
     createdAt = db.Column(db.DateTime, default=datetime.now)
-    
-    UniqueConstraint("buildingNumber", "roomNumber")
 
     profiles = db.relationship("Profile", back_populates='labs')
     barrels = db.relationship("Barrel", back_populates='labs', cascade='all, delete-orphan')

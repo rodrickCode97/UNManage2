@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 238eca64dba1
+Revision ID: a16a47c22061
 Revises: 
-Create Date: 2024-02-11 15:08:00.769561
+Create Date: 2024-02-12 20:29:15.182815
 
 """
 from alembic import op
@@ -12,9 +12,8 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 
-
 # revision identifiers, used by Alembic.
-revision = '238eca64dba1'
+revision = 'a16a47c22061'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,12 +32,11 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-
     op.create_table('profiles',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('is_EHS', sa.Boolean(), nullable=True),
-    sa.Column('theme', sa.String(length=255), nullable=True),
+    sa.Column('theme', sa.String(length=25), nullable=True),
     sa.Column('createdAt', sa.DateTime(), nullable=True),
     sa.Column('updatedAt', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
@@ -47,7 +45,6 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE profiles SET SCHEMA {SCHEMA};")
-
     op.create_table('labs',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('profile_id', sa.Integer(), nullable=False),
@@ -55,11 +52,11 @@ def upgrade():
     sa.Column('roomNumber', sa.Integer(), nullable=True),
     sa.Column('createdAt', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['profile_id'], ['profiles.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('buildingNumber', 'roomNumber')
     )
     if environment == "production":
         op.execute(f"ALTER TABLE labs SET SCHEMA {SCHEMA};")
-
     op.create_table('vendors',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=35), nullable=False),
@@ -73,7 +70,6 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE vendors SET SCHEMA {SCHEMA};")
-
     op.create_table('barrels',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('lab', sa.Integer(), nullable=False),
@@ -88,7 +84,6 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE barrels SET SCHEMA {SCHEMA};")
-
     # ### end Alembic commands ###
 
 
