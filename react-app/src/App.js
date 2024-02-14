@@ -26,12 +26,13 @@ import DeleteVendorButton from "./components/Vendor/delete";
 import CreateVendorForm from "./components/Vendor/create";
 import CreateBarrelForm from "./components/Barrel/create";
 import CreateLabForm from "./components/Lab/create";
+import { readVendor } from "./store/vendors";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    dispatch(authenticate()).then(() => dispatch(readProfile())).then(() => setIsLoaded(true));
+    dispatch(authenticate()).then(() => dispatch(readProfile())).then(() => dispatch(readLab())).then(() => dispatch(readVendor())).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
@@ -45,13 +46,11 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path="/profiles/dashboard">
-            <CreateProfileForm />
-          <Profile />
+          <Route exact path="/profiles">
+             <CreateProfileForm /> 
           </Route>
-          <Route exact path='/profiles/:id'>
-            <UpdateProfileForm />
-            <DeleteProfile />
+          <Route exact path="/profiles/dashboard">
+          <Profile />
           </Route>
           <Route exact path='/labs'>
             <Labs />
@@ -59,7 +58,7 @@ function App() {
           <Route exact path='/labs/:id'>
             <UpdateLabForm />
             <DeleteLabButton />
-            <Vendors />
+           <Barrel />
           </Route>
           <Route exact path="/labs/:id/barrels">
           <Barrel />

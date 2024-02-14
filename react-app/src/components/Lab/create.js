@@ -45,9 +45,9 @@ const CreateLabForm = () => {
 
     };
 
-    useEffect(() => {
-        dispatch(readLab())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(readLab())
+    // }, [dispatch])
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="barrel_form_container">

@@ -4,29 +4,38 @@ import "./profile.css";
 import OpenModalButton from '../OpenModalButton';
 import { useHistory, useParams } from 'react-router-dom';
 import { deleteProfile, readProfile } from '../../store/profiles';
+import { useModal } from '../../context/Modal';
 
 
-const DeleteProfile = () => {
-    const { id } = useParams();
+const DeleteProfile = (state) => {
+    console.log(state)
+    const { id } = state.state;
     const profile_id = parseInt(id)
+    const {closeModal} = useModal()
+    console.log(id)
   
     const dispatch = useDispatch();
     const ulRef = useRef();
     const history = useHistory();
-    const [isLoading, setIsLoading] = useState(true);
+    // const [isLoading, setIsLoading] = useState(true);
     const handleDelete = e => {
         e.preventDefault();
-   dispatch(deleteProfile(profile_id)).then(() => dispatch(readProfile()));
-        history.push('/profiles/dashboard');
+   dispatch(deleteProfile(profile_id)).then(() => dispatch(readProfile())).then(closeModal());
+        history.push('/profiles');
     }
-    useEffect(() => {
-        dispatch(readProfile()).then(() => setIsLoading(false))
-    }, [dispatch])
+    const cancelDelete = e => {
+        e.preventDefault()
+        closeModal()
+    }
+    // useEffect(() => {
+    //     dispatch(readProfile()).then(() => setIsLoading(false))
+    // }, [dispatch])
     
     return (
         <div>
-            
-       <button type='submit' onClick={handleDelete}> Delete Profile</button>
+           <p>are you sure you want to delete this profile? </p> 
+            <button type='submit' onClick={handleDelete}> Delete Profile</button>
+            <button type='submit' onClick={cancelDelete}>Cancel</button>
            
         </div>
     )

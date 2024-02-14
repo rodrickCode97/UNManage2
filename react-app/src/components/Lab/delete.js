@@ -19,9 +19,9 @@ const DeleteLabButton = () => {
    dispatch(deleteLab(lab_id)).then(() => dispatch(readLab()));
         history.push('/labs');
     }
-    useEffect(() => {
-        dispatch(readLab()).then(() => setIsLoading(false))
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(readLab()).then(() => setIsLoading(false))
+    // }, [dispatch])
     
     return (
         <div>

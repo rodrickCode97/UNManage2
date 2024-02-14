@@ -2,12 +2,14 @@ import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { createProfile, readProfile } from '../../store/profiles';
 import { useModal } from "../../context/Modal";
+import { useHistory } from "react-router-dom/";
 
 import "./profile.css";
 
 const CreateProfileForm = () => {
     const dispatch = useDispatch();
-    const profile = useSelector(state => state.profiles.profiles[0])
+    const profile = useSelector(state => state.profiles.profiles[0]);
+    const history = useHistory()
     console.log(profile)
     
 
@@ -32,9 +34,13 @@ const CreateProfileForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({})
-        if(profile) setErrors({errors: "A profile for this user already exists"})
+        if(profile){
+            setErrors({ errors: "A profile for this user already exists" }) 
+            return
+        } 
         try {
-            await dispatch(createProfile(payload)).then(() => dispatch(readProfile())).then(() => closeModal());
+            await dispatch(createProfile(payload)).then(() => history.push('/profiles/dashboard'));
+        
         } catch (data) {
             setErrors({ ...data });
         }

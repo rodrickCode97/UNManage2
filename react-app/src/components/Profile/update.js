@@ -2,15 +2,14 @@ import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {readProfile, updateProfile } from '../../store/profiles';
 import { useModal } from "../../context/Modal";
-import { useParams } from "react-router-dom"
-
 import "./profile.css";
-
-const UpdateProfileForm = () => {
+const UpdateProfileForm = (profile) => {
     const dispatch = useDispatch();
-    const { id } = useParams();
+ 
+    console.log(profile)
+    const {id} = profile.profile
     const profile_id = parseInt(id)
-  
+ 
 
     //state 
     const [isEHS, setIsEHS] = useState();
