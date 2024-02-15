@@ -31,11 +31,12 @@ const LabDetail = () => {
                      <h3>Profile Number: {barrel.profileNumber}</h3>
                     <p>Waste Capacity: {barrel.wasteCapacity} Gallons </p>
                     <p>Full: {barrel.is_full ? 'Yes' : 'No'}</p>
-                    <OpenModalButton buttonText={'Update Barrel'} modalComponent={<UpdateBarrelForm state={{'lab_id': id,'barrel_id': barrel.id}} />} />
+                    <OpenModalButton buttonText={'Update Barrel'} modalComponent={<UpdateBarrelForm state={{'lab_id': id,'barrel_id': barrel.id}}  /> } className={"ld ld-bounce-in"}/>
                     <OpenModalButton buttonText={"Delete Barrel"} modalComponent={<DeleteBarrelButton state={{'lab_id': id,'barrel_id': barrel.id}} />} />
                 </div>    
             ))}
-            <OpenModalButton buttonText={'Add Barrel'} modalComponent={<CreateBarrelForm state={lab} />} />
+            <OpenModalButton buttonText={'Add Barrel'} modalComponent={<CreateBarrelForm state={lab} />} className={"ld ld-surprise"} />
+            <div class="ld ld-spin"></div>
           
         </div>
 )

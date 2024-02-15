@@ -90,7 +90,6 @@ const UpdateBarrelForm = (state) => {
 					required
                 />
                 <p> Gallons</p>
-          
     <p>Is Barrel Full?</p>
     <div>
       <input type="radio" id="choice1" name="contact" value={true} onChange={handleIs_full} />
