@@ -17,10 +17,9 @@ const UpdateBarrelForm = (state) => {
 
     //state 
     const [profileNumber, setProfileNumber] = useState('');
-    const [buildingNumber, setBuildingNumber] = useState();
-    const [roomNumber, setRoomNumber] = useState();
     const [wasteType, setWasteType] = useState();
     const [wasteCapacity, setWasteCapacity] = useState();
+    const [is_full, setIs_full] = useState()
     const [errors, setErrors] = useState('')
     const { closeModal } = useModal();
     
@@ -29,6 +28,7 @@ const UpdateBarrelForm = (state) => {
     const handleProfileNumber = (e) => setProfileNumber(e.target.value)
     const handleWasteType= (e) => setWasteType(e.target.value)
     const handleWasteCapacity = (e) => setWasteCapacity(e.target.value)
+    const handleIs_full = e => setIs_full(e.target.value)
    
 
     //payload
@@ -36,6 +36,7 @@ const UpdateBarrelForm = (state) => {
         profileNumber,
         wasteType,
         wasteCapacity: parseInt(wasteCapacity),
+        is_full
     }
 
     const handleSubmit = async (e) => {
@@ -89,6 +90,15 @@ const UpdateBarrelForm = (state) => {
 					required
                 />
                 <p> Gallons</p>
+          
+    <p>Is Barrel Full?</p>
+    <div>
+      <input type="radio" id="choice1" name="contact" value={true} onChange={handleIs_full} />
+      <label for="choice1">Yes</label>
+      <input type="radio" id="choice2" name="contact" value={false} onChange={handleIs_full} />
+      <label for="choice2">No</label>
+    </div>
+
 				<button type="submit" className="submitButton">
 					Update Barrel
 				</button>
