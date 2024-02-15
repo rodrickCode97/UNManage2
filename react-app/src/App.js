@@ -27,6 +27,8 @@ import CreateVendorForm from "./components/Vendor/create";
 import CreateBarrelForm from "./components/Barrel/create";
 import CreateLabForm from "./components/Lab/create";
 import { readVendor } from "./store/vendors";
+import LabDetail from "./components/Lab/labDetail";
+import BarrelDetail from "./components/Barrel/barrelDetail";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,16 +58,10 @@ function App() {
             <Labs />
           </Route>
           <Route exact path='/labs/:id'>
-            <UpdateLabForm />
-            <DeleteLabButton />
-           <Barrel />
+            <LabDetail />
           </Route>
           <Route exact path="/labs/:id/barrels">
           <Barrel />
-          </Route>
-          <Route exact path="/labs/:lab_id/barrels/:barrel_id">
-            <UpdateBarrelForm />
-            <DeleteBarrelButton />
           </Route>
           <Route exact path="/vendors">
             <CreateVendorForm />

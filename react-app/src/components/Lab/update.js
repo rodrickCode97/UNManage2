@@ -5,10 +5,10 @@ import { useModal } from "../../context/Modal";
 import { useParams } from "react-router-dom";
 import "./lab.css";
 
-const UpdateLabForm = () => {
+const UpdateLabForm = (state) => {
     const dispatch = useDispatch();
-    const { id } = useParams();
-    const lab_id = parseInt(id)
+    const lab_id = parseInt(state.state)
+    console.log(lab_id)
 
     //state 
     const [profileNumber, setProfileNumber] = useState('');
@@ -35,7 +35,7 @@ const UpdateLabForm = () => {
         e.preventDefault();
         setErrors({})
         try {
-            await dispatch(updateLab(lab_id, payload)).then(() => dispatch(readLab())).then(() => closeModal());
+          dispatch(updateLab(lab_id, payload)).then(() => dispatch(readLab())).then(() => closeModal());
         } catch (data) {
             setErrors({ ...data });
         }

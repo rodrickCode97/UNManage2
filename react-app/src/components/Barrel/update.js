@@ -2,16 +2,18 @@ import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector, } from "react-redux";
 import { createBarrel, readBarrel, updateBarrel } from "../../store/barrels";
 import { useModal } from "../../context/Modal";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import "./barrel.css";
+import { readLab } from "../../store/lab";
 
-const UpdateBarrelForm = () => {
+const UpdateBarrelForm = (state) => {
     const dispatch = useDispatch();
-    console.log(useParams())
-    const { lab_id, barrel_id } = useParams();
+   const history = useHistory()
+    const { lab_id, barrel_id } = state.state ;
     const labId = parseInt(lab_id)
     const barrelId = parseInt(barrel_id);
-    console.log(labId , barrelId)
+    console.log(barrel_id, labId)
+
 
     //state 
     const [profileNumber, setProfileNumber] = useState('');
@@ -25,8 +27,6 @@ const UpdateBarrelForm = () => {
     // handles
 
     const handleProfileNumber = (e) => setProfileNumber(e.target.value)
-    const handleBuildingNumber = (e) => setBuildingNumber(e.target.value)
-    const handleRoomNumber = (e) => setRoomNumber(e.target.value)
     const handleWasteType= (e) => setWasteType(e.target.value)
     const handleWasteCapacity = (e) => setWasteCapacity(e.target.value)
    
@@ -34,8 +34,6 @@ const UpdateBarrelForm = () => {
     //payload
     const payload = {
         profileNumber,
-        buildingNumber: parseInt(buildingNumber),
-        roomNumber: parseInt(roomNumber),
         wasteType,
         wasteCapacity: parseInt(wasteCapacity),
     }
@@ -44,11 +42,11 @@ const UpdateBarrelForm = () => {
         e.preventDefault();
         setErrors({})
         try {
-            console.log(lab_id)
-            await dispatch(updateBarrel(labId, barrel_id, payload)).then(() => dispatch(readBarrel(lab_id))).then(() => closeModal());
+
+        dispatch(updateBarrel(labId, barrel_id, payload)).then(() => dispatch(readBarrel(lab_id))).then(()=> dispatch(readLab())).then(() => closeModal());
         } catch (data) {
             setErrors({ ...data });
-            console.log(data)
+            
         }
         setProfileNumber('')
         setWasteType('')

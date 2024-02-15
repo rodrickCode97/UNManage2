@@ -93,7 +93,7 @@ const barrelReducer = (state = initState, action) => {
         case CREATE:
             const id = action.payload.id;
             const newObj = { ...state };
-            newObj.barrels[id] = action.payload;
+            newObj[id] = action.payload;
             return newObj;
         case READ:
             if (action.type) {

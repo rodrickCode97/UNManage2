@@ -3,12 +3,14 @@ import { useDispatch, useSelector, } from "react-redux";
 import { createBarrel, readBarrel } from "../../store/barrels";
 import { useModal } from "../../context/Modal";
 import { useParams } from "react-router-dom";
+import { readLab } from "../../store/lab";
 import "./barrel.css";
 
-const CreateBarrelForm = () => {
+const CreateBarrelForm = (state) => {
     const dispatch = useDispatch();
-    const { id } = useParams();
+    const { id } = state.state;
     const lab_id = parseInt(id)
+  
 
     //state 
     const [profileNumber, setProfileNumber] = useState('');
@@ -37,7 +39,7 @@ const CreateBarrelForm = () => {
         e.preventDefault();
         setErrors({})
         try {
-            await dispatch(createBarrel(lab_id, payload)).then(() => dispatch(readBarrel(lab_id)));
+            dispatch(createBarrel(lab_id, payload)).then(() => dispatch(readBarrel(lab_id))).then(()=> dispatch(readLab())).then(() => closeModal());
         } catch (data) {
             setErrors({ ...data })
         }
@@ -47,9 +49,10 @@ const CreateBarrelForm = () => {
 
     };
 
-    useEffect(() => {
-        dispatch(readBarrel(lab_id))
-    }, [dispatch, lab_id])
+    // useEffect(() => {
+    //     dispatch(readLab())
+    // }, [dispatch])
+    
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="barrel_form_container">
