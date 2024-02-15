@@ -20,7 +20,11 @@ const DeleteBarrelButton = (state) => {
     const handleDelete = e => {
         e.preventDefault();
    dispatch(deleteBarrel(labId, barrelId)).then(() => dispatch(readBarrel(labId))).then(()=> dispatch(readLab())).then(()=> closeModal());
-       ;
+    }
+
+    const handleCancel = e => {
+        e.preventDefault();
+        closeModal();
     }
     useEffect(() => {
         dispatch(readBarrel(labId)).then(() => setIsLoading(false))
@@ -28,8 +32,9 @@ const DeleteBarrelButton = (state) => {
     
     return (
         <div>
-            
-       <button type='submit' onClick={handleDelete}> Delete Barrel</button>
+            <p>Are you sure you want to delete this Barrel?</p>
+            <button type='submit' onClick={handleDelete}> Delete Barrel</button>
+            <button type='submit' onClick={handleCancel}> Cancel</button>
            
         </div>
     )
