@@ -29,6 +29,7 @@ import CreateLabForm from "./components/Lab/create";
 import { readVendor } from "./store/vendors";
 import LabDetail from "./components/Lab/labDetail";
 import BarrelDetail from "./components/Barrel/barrelDetail";
+import Landing from "./components/LandingPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="app">
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
@@ -73,9 +74,12 @@ function App() {
             <UpdateVendorForm />
             <DeleteVendorButton />
           </Route>
+          <Route exact path='/'>
+            <Landing />
+            </Route>
         </Switch>
       )}
-    </>
+    </div>
   );
 }
 

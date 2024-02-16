@@ -19,19 +19,23 @@ const Profile = () => {
     const history = useHistory();
     const [isLoading, setIsLoading] = useState(true);
     const profile = useSelector(state => state.profiles.profiles)
+    const session = useSelector(state => state.session)
+    let user;
     useEffect(() => {
         dispatch(readProfile()).then(() => dispatch(readLab())).then(()=> setIsLoading(false))
       }, [dispatch]);
-
-if(profile) console.log(profile)
-    if(isLoading) return <h1> Loading </h1>
+    if (session.user) {
+        user = session.user.username
+    }
+    if(isLoading === true) return <h1> Loading </h1>
     return (
-        <div className='ld ld-blur-in'>
-            <h1>Hello From Profile</h1>
+        <div className=' profile_container ld ld-blur-in'>
+            <h1>Hello {session.user ? user : ''}!</h1>
             <OpenModalButton buttonText={'edit profile'} modalComponent={<UpdateProfileForm profile={profile} />} />
             <OpenModalButton buttonText={'delete profile'} modalComponent={<DeleteProfile state={profile} />} />
-            <Vendors /> 
+            <Vendors />
             <Labs/>
+       
 
         </div>
     )

@@ -31,13 +31,13 @@ const Vendors = () => {
             <h1>Hello From Vendors</h1>
             <p> Current Vendors:</p>
             <div className='vendors'>  
+            <OpenModalButton buttonText={'Add Vendor'} modalComponent={<CreateVendorForm />} className='add_vendor vendors_button' />
             {vendorsArr.map(vendor => (
                 <div key={vendor.id} >
-                    <OpenModalButton buttonText={vendor.name} modalComponent={<VendorDetail state={vendor.id} />}/>
+                    <OpenModalButton className={'vendors_button'} buttonText={vendor.name} modalComponent={<VendorDetail state={vendor.id} />}/>
                     </div>
             ))}
             </div>
-             <OpenModalButton buttonText={'Add Vendor'} modalComponent={<CreateVendorForm />} />
         </div>
     )
 }

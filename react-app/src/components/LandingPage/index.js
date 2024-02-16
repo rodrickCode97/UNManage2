@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import "./vendor.css";
+import "./landingPage.css";
 import OpenModalButton from '../OpenModalButton';
 import { useHistory } from 'react-router-dom';
 import SignupFormModal from '../SignupFormModal';
@@ -10,19 +10,16 @@ const Landing = () => {
     const dispatch = useDispatch();
     const ulRef = useRef();
     const history = useHistory();
-    const vendors = useSelector(state => state.vendors.vendors);
-    const vendorsArr = Object.values(vendors) 
+   
     // useEffect(() => {
     //     dispatch(readVendor()).then(() => setIsLoading(false))
     // })
     return (
-        <div className='Landing_container'>
+        <div className='landing_container'>
+            <div className={'content'}>
             <h1>UN-Manage 2</h1>
-            <div>
             <OpenModalButton modalComponent={<SignupFormModal />} buttonText={'Sign Up'} />
                 <OpenModalButton modalComponent={<LoginFormModal />} buttonText={'Login'} />
-
-
             </div>
         </div>
     )

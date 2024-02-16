@@ -22,15 +22,19 @@ const Labs = () => {
     }
     if(isLoading) return <h1>Loading...</h1>
     return (
-        <div>
+        <div className='lab_container'>
         <h1>Hello From Labs</h1>
-            <OpenModalButton modalComponent={< CreateLabForm />} buttonText={'Add Lab'} />
             <p> Labs </p>
+            <div className='lab_div'> 
+            <OpenModalButton modalComponent={< CreateLabForm />} buttonText={'Add Lab'}  className={'lab_button add_lab'}/>
             {labsArr.map(lab => (
                 <div key={lab.id}>
-                    <NavLink exact to={`/labs/${lab.id}`}><p>Building {lab.buildingNumber}, Room {lab.roomNumber}</p></NavLink>
+                    <div className='lab_button'>
+                        <NavLink exact to={`/labs/${lab.id}`} className='lab_button'><p>Building {lab.buildingNumber}, Room {lab.roomNumber}</p></NavLink>
+                        </div>
                     </div>
             ))}
+        </div>
         </div>
     )
 }
