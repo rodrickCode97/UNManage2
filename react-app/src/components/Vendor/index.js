@@ -5,6 +5,10 @@ import OpenModalButton from '../OpenModalButton';
 import { useHistory } from 'react-router-dom';
 import { readVendor } from '../../store/vendors';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import CreateVendorForm from './create';
+import DeleteVendorButton from './delete';
+import UpdateVendorForm from './update';
+import VendorDetail from './vendorDetail';
 
 const Vendors = () => {
     const dispatch = useDispatch();
@@ -12,18 +16,22 @@ const Vendors = () => {
     const history = useHistory();
     const vendors = useSelector(state => state.vendors.vendors);
     const vendorsArr = Object.values(vendors) 
-    // useEffect(() => {
-    //     dispatch(readVendor()).then(() => setIsLoading(false))
-    // })
+    useEffect(() => {
+        dispatch(readVendor())
+    })
+
     return (
-        <div>
+        <div className='vendor_container'>
             <h1>Hello From Vendors</h1>
             <p> Current Vendors:</p>
+            <div className='vendors'>  
             {vendorsArr.map(vendor => (
-                <div key={vendor.id}>
-                   <NavLink exact to={`/vendors/${vendor.id}`}> <p>{vendor.name}</p></NavLink>
+                <div key={vendor.id} >
+                    <OpenModalButton buttonText={vendor.name} modalComponent={<VendorDetail state={vendor.id} />}/>
                     </div>
             ))}
+            </div>
+             <OpenModalButton buttonText={'Add Vendor'} modalComponent={<CreateVendorForm />} />
         </div>
     )
 }

@@ -17,7 +17,7 @@ const LabDetail = () => {
     const currentLab = labsArr.filter(lab => lab.id === Number(id))
     const lab = currentLab[0]
     return (
-        <div>
+        <div className="ld ld-blur-in">
             <div>
                 <OpenModalButton buttonText={'Update Lab'} modalComponent={<UpdateLabForm state={id} />} />
                 <OpenModalButton buttonText={'Delete Lab'} modalComponent={<DeleteLabButton state={id} />} />
@@ -31,12 +31,12 @@ const LabDetail = () => {
                      <h3>Profile Number: {barrel.profileNumber}</h3>
                     <p>Waste Capacity: {barrel.wasteCapacity} Gallons </p>
                     <p>Full: {barrel.is_full ? 'Yes' : 'No'}</p>
-                    <OpenModalButton buttonText={'Update Barrel'} modalComponent={<UpdateBarrelForm state={{'lab_id': id,'barrel_id': barrel.id}}  /> } className={"ld ld-bounce-in"}/>
+                    <OpenModalButton buttonText={'Update Barrel'} modalComponent={<UpdateBarrelForm state={{'lab_id': id,'barrel_id': barrel.id}} /> } />
                     <OpenModalButton buttonText={"Delete Barrel"} modalComponent={<DeleteBarrelButton state={{'lab_id': id,'barrel_id': barrel.id}} />} />
                 </div>    
             ))}
-            <OpenModalButton buttonText={'Add Barrel'} modalComponent={<CreateBarrelForm state={lab} />} className={"ld ld-surprise"} />
-            <div class="ld ld-spin"></div>
+            <OpenModalButton buttonText={'Add Barrel'} modalComponent={<CreateBarrelForm state={lab} />}  />
+          
           
         </div>
 )

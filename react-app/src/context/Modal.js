@@ -48,7 +48,7 @@ export function Modal() {
   return ReactDOM.createPortal(
     <div id="modal">
       <div id="modal-background" onClick={closeModal} />
-      <div id="modal-content">
+      <div id="modal-content" className="ld ld-spring-ttb-in">
         {modalContent}
       </div>
     </div>,

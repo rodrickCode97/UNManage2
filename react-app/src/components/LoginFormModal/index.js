@@ -3,6 +3,8 @@ import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+import { readProfile } from "../../store/profiles";
+import { useHistory } from "react-router-dom";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -10,10 +12,12 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
+    history.push('/profiles/dashboard')
     if (data) {
       setErrors(data);
     } else {
