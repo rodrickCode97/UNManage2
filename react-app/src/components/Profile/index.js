@@ -18,13 +18,13 @@ const Profile = () => {
     const ulRef = useRef();
     const history = useHistory();
     const [isLoading, setIsLoading] = useState(true);
-    const profile = useSelector(state => state.profiles.profiles[0])
+    const profile = useSelector(state => state.profiles.profiles)
     useEffect(() => {
-        dispatch(readLab())
+        dispatch(readProfile()).then(() => dispatch(readLab())).then(()=> setIsLoading(false))
       }, [dispatch]);
 
-
-    // if(isLoading) return <h1> Loading </h1>
+if(profile) console.log(profile)
+    if(isLoading) return <h1> Loading </h1>
     return (
         <div className='ld ld-blur-in'>
             <h1>Hello From Profile</h1>

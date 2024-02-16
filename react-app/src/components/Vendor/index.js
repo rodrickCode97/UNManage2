@@ -14,12 +14,18 @@ const Vendors = () => {
     const dispatch = useDispatch();
     const ulRef = useRef();
     const history = useHistory();
-    const vendors = useSelector(state => state.vendors.vendors);
-    const vendorsArr = Object.values(vendors) 
+    const vendors = useSelector(state => state.vendors.vendors); 
+    let vendorsArr;
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        dispatch(readVendor())
+        dispatch(readVendor()).then(() => setIsLoading(false))
     }, [dispatch])
 
+    if (vendors) {
+         vendorsArr = Object.values(vendors) 
+    }
+    console.log(vendorsArr)
+    if(isLoading) return <h1> Hello from vendors</h1>
     return (
         <div className='vendor_container'>
             <h1>Hello From Vendors</h1>

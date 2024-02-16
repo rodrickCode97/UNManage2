@@ -1,4 +1,5 @@
-import { useDispatch, useSelector  } from "react-redux";
+import React,{ useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 import './lab.css'
 import OpenModalButton from "../OpenModalButton";
@@ -8,14 +9,24 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import UpdateBarrelForm from "../Barrel/update";
 import UpdateLabForm from "./update";
 import DeleteLabButton from "./delete";
+import { readLab } from "../../store/lab";
 
 const LabDetail = () => {
     const dispatch = useDispatch()
     const { id } = useParams();
     const labs = useSelector(state => state.lab.labs)
-    const labsArr = Object.values(labs);
-    const currentLab = labsArr.filter(lab => lab.id === Number(id))
-    const lab = currentLab[0]
+    const [isLoading, setIsLoading] = useState(true)
+    let labsArr;
+    let lab;
+    useEffect(() => {
+        dispatch(readLab()).then(() => setIsLoading(false))
+    })
+    if(labs) {
+        labsArr = Object.values(labs);
+        const currentLab = labsArr.filter(lab => lab.id === Number(id))
+        lab = currentLab[0]
+    }
+    if(isLoading) return <h1>Loading</h1>
     return (
         <div className="ld ld-blur-in">
             <div>

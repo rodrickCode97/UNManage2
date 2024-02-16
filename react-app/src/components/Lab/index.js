@@ -11,12 +11,16 @@ const Labs = () => {
     const ulRef = useRef();
     const history = useHistory();
     const labs = useSelector(state => state.lab.labs);
-    const labsArr = Object.values(labs);
-    console.log(labsArr);
-    // const [isLoading, setIsLoading] = useState(true);
-    // useEffect(() => {
-    //     dispatch(readLab()).then(()=> setIsLoading(false))
-    // }, [dispatch])
+    let labsArr;
+    console.log(labs);
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        dispatch(readLab()).then(()=> setIsLoading(false))
+    }, [dispatch])
+    if (labs) {
+     labsArr = Object.values(labs); 
+    }
+    if(isLoading) return <h1>Loading...</h1>
     return (
         <div>
         <h1>Hello From Labs</h1>
