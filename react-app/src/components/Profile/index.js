@@ -24,7 +24,7 @@ const Profile = () => {
       }, [dispatch]);
 
 
-    if(isLoading) return <h1> Loading </h1>
+    // if(isLoading) return <h1> Loading </h1>
     return (
         <div className='ld ld-blur-in'>
             <h1>Hello From Profile</h1>

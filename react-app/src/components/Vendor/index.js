@@ -18,7 +18,7 @@ const Vendors = () => {
     const vendorsArr = Object.values(vendors) 
     useEffect(() => {
         dispatch(readVendor())
-    })
+    }, [dispatch])
 
     return (
         <div className='vendor_container'>
