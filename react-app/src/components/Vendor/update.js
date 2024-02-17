@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom"
 
 import "./vendor.css";
 
-const UpdateVendorForm = () => {
+const UpdateVendorForm = (state) => {
     const dispatch = useDispatch();
     //state 
     const [name, setName] = useState('');
@@ -14,7 +14,8 @@ const UpdateVendorForm = () => {
     const [email, setEmail] = useState('');
     const [errors, setErrors] = useState('')
     const { closeModal } = useModal();
-    const { id } = useParams();
+    const  id  = state.state;
+    
     
     // handles
     const handleName = e => setName(e.target.value);
@@ -37,7 +38,7 @@ const UpdateVendorForm = () => {
             await dispatch(updateVendor(parseInt(id), payload)).then(() => dispatch(readVendor()));
         } catch (data) {
             setErrors({ ...data });
-            console.log(data)
+         
         }
         setName('')
         setPhoneNumber('')
@@ -51,7 +52,7 @@ const UpdateVendorForm = () => {
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="vendor_form_container">
-				{errors && <p>{errors.errors}</p>}
+				{errors && <p>{errors.message}</p>}
 				<input
 					className="vendor_form_input"
 					type="text"

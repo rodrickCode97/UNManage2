@@ -37,7 +37,7 @@ def create_vendor():
     current_profile = [profile for profile in profiles]
     # return jsonify({'current_profile': current_profile[0].to_dict()})
     # if the current profile is not  a part of the EHS group return error
-    if not  current_profile[0].is_EHS : 
+    if not current_profile[0].is_EHS : 
         return jsonify({'message': 'unauthorized'}), 400
         # if form has no errors 
     if form.validate_on_submit():

@@ -35,7 +35,7 @@ const CreateVendorForm = () => {
             await dispatch(createVendor(payload)).then(() => dispatch(readVendor())).then(() => closeModal());
         } catch (data) {
             setErrors({ ...data });
-            console.log(errors)
+        
         }
         setName('')
         setPhoneNumber('')
@@ -49,7 +49,7 @@ const CreateVendorForm = () => {
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="vendor_form_container">
-				{errors && <p>{errors.errors}</p>}
+				{errors && <p>{errors.message}</p>}
 				<input
 					className="vendor_form_input"
 					type="text"
