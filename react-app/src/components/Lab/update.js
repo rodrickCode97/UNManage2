@@ -35,8 +35,9 @@ const UpdateLabForm = (state) => {
         e.preventDefault();
         setErrors({})
         try {
-          dispatch(updateLab(lab_id, payload)).then(() => dispatch(readLab())).then(() => closeModal());
+          await dispatch(updateLab(lab_id, payload)).then(() => dispatch(readLab())).then(() => closeModal());
         } catch (data) {
+            console.log(data)
             setErrors({ ...data });
         }
         setBuildingNumber(buildingNumber)
