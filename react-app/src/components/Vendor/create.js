@@ -78,7 +78,7 @@ const CreateVendorForm = () => {
 					required
                 />
               
-				<button type="submit" className="submitButton">
+				<button type="submit" className="button">
 					Add Vendor
 				</button>
 			</form>

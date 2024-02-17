@@ -31,7 +31,7 @@ const Labs = () => {
             <OpenModalButton modalComponent={< CreateLabForm />} buttonText={'Add Lab'}  className={'lab_button'}/>
             {labsArr.map(lab => (
                 <div key={lab.id}className='lab_button'>
-                   <NavLink exact to={`/labs/${lab.id}`}> <div>
+                   <NavLink exact to={`/labs/${lab.id}`} className={'lab_b'}> <div>
                         <p>Building {lab.buildingNumber}, Room {lab.roomNumber}</p>
                         </div></NavLink>
                     </div>

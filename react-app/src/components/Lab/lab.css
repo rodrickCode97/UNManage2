@@ -16,7 +16,11 @@
     flex-direction:row;
    width: 100%;
 }
-
+.lab_b{
+    text-decoration: none;
+    font: inherit;
+    color: inherit;
+}
 
 
 .lab_button {

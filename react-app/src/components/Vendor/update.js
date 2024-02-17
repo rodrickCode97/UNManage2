@@ -81,7 +81,7 @@ const UpdateVendorForm = (state) => {
 					required
                 />
               
-				<button type="submit" className="submitButton">
+				<button type="submit" className="button">
 					Update Vendor
 				</button>
 			</form>
