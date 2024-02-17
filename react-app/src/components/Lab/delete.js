@@ -19,7 +19,7 @@ const DeleteLabButton = (state) => {
     const handleDelete = e => {
         e.preventDefault();
    dispatch(deleteLab(lab_id)).then(() => dispatch(readLab())).then(() => closeModal());
-        history.push('/labs');
+        history.push('/profiles/dashboard');
     }
     const handleCancel = e => {
         e.preventDefault();

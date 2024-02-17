@@ -18,8 +18,8 @@ const VendorDetail = (state) => {
     return (
         <div className={"vendor_container"}>
             <div>
-                <OpenModalButton buttonText={'Update Vendor'} modalComponent={<UpdateVendorForm state={id} />} />
-                <OpenModalButton buttonText={'Delete Vendor'} modalComponent={<DeleteVendorButton state={id} />} />
+                <OpenModalButton className={'button'} buttonText={'Update Vendor'} modalComponent={<UpdateVendorForm state={id} />} />
+                <OpenModalButton className={'button'} buttonText={'Delete Vendor'} modalComponent={<DeleteVendorButton state={id} />} />
             </div>
             <h1>hi from Vendor detail</h1>
             <h1> {vendor.name}, </h1>

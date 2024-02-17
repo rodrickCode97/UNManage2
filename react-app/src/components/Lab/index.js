@@ -6,6 +6,8 @@ import { useHistory, NavLink } from 'react-router-dom';
 import { readLab } from '../../store/lab';
 import CreateLabForm from './create';
 
+
+
 const Labs = () => {
     const dispatch = useDispatch();
     const ulRef = useRef();
@@ -20,18 +22,18 @@ const Labs = () => {
     if (labs) {
      labsArr = Object.values(labs); 
     }
-    if(isLoading) return <h1>Loading...</h1>
+    if(isLoading) return <img src='/react-app/src/resources/images/flask.svg' alt='flask'/>
     return (
         <div className='lab_container'>
         <h1>Hello From Labs</h1>
             <p> Labs </p>
             <div className='lab_div'> 
-            <OpenModalButton modalComponent={< CreateLabForm />} buttonText={'Add Lab'}  className={'lab_button add_lab'}/>
+            <OpenModalButton modalComponent={< CreateLabForm />} buttonText={'Add Lab'}  className={'lab_button'}/>
             {labsArr.map(lab => (
-                <div key={lab.id}>
-                    <div className='lab_button'>
-                        <NavLink exact to={`/labs/${lab.id}`} className='lab_button'><p>Building {lab.buildingNumber}, Room {lab.roomNumber}</p></NavLink>
-                        </div>
+                <div key={lab.id}className='lab_button'>
+                   <NavLink exact to={`/labs/${lab.id}`}> <div>
+                        <p>Building {lab.buildingNumber}, Room {lab.roomNumber}</p>
+                        </div></NavLink>
                     </div>
             ))}
         </div>

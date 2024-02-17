@@ -30,20 +30,22 @@ import { readVendor } from "./store/vendors";
 import LabDetail from "./components/Lab/labDetail";
 import BarrelDetail from "./components/Barrel/barrelDetail";
 import Landing from "./components/LandingPage";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const sessionUser = useSelector(state => state.session.user);
+  const location = useLocation()
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
-    // if(sessionUser) dispatch(readProfile()).then(() => dispatch(readLab()).then(()=> dispatch(readVendor())))
-    
   }, [dispatch]);
+
+  const showNavbar = !["/", "/signup"].includes(location.pathname);
 
   return (
     <div className="app">
-      <Navigation isLoaded={isLoaded} />
+     {showNavbar && <Navigation isLoaded={isLoaded} />}
       {isLoaded && (
         <Switch>
           <Route path="/login" >
@@ -67,9 +69,9 @@ function App() {
           <Route exact path="/labs/:id/barrels">
           <Barrel />
           </Route>
-          <Route exact path="/vendors">
+          {/* <Route exact path="/vendors">
             <CreateVendorForm />
-          </Route>
+          </Route> */}
           <Route exact path="/vendors/:id">
             <UpdateVendorForm />
             <DeleteVendorButton />

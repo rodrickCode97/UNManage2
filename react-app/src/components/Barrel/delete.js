@@ -33,8 +33,8 @@ const DeleteBarrelButton = (state) => {
     return (
         <div>
             <p>Are you sure you want to delete this Barrel?</p>
-            <button type='submit' onClick={handleDelete}> Delete Barrel</button>
-            <button type='submit' onClick={handleCancel}> Cancel</button>
+            <button type='submit' className={'button'}onClick={handleDelete}> Delete Barrel</button>
+            <button type='submit'className={'button'} onClick={handleCancel}> Cancel</button>
            
         </div>
     )

@@ -20,18 +20,18 @@ const LabDetail = () => {
     let lab;
     useEffect(() => {
         dispatch(readLab()).then(() => setIsLoading(false))
-    })
+    }, [dispatch])
     if(labs) {
         labsArr = Object.values(labs);
         const currentLab = labsArr.filter(lab => lab.id === Number(id))
         lab = currentLab[0]
     }
-    if(isLoading) return <h1>Loading</h1>
+    if(isLoading) return <img src='../../resources/images/flask.svg' alt='flask'/>
     return (
         <div className="ld ld-blur-in">
             <div>
-                <OpenModalButton buttonText={'Update Lab'} modalComponent={<UpdateLabForm state={id} />} />
-                <OpenModalButton buttonText={'Delete Lab'} modalComponent={<DeleteLabButton state={id} />} />
+                <OpenModalButton className={'button'} buttonText={'Update Lab'} modalComponent={<UpdateLabForm state={id} />} />
+                <OpenModalButton className={'button'} buttonText={'Delete Lab'} modalComponent={<DeleteLabButton state={id} />} />
             </div>
             <h1>hi from Lab detail</h1>
             <h1>Building {lab.buildingNumber}, Rm {lab.roomNumber}</h1>
@@ -42,11 +42,11 @@ const LabDetail = () => {
                      <h3>Profile Number: {barrel.profileNumber}</h3>
                     <p>Waste Capacity: {barrel.wasteCapacity} Gallons </p>
                     <p>Full: {barrel.is_full ? 'Yes' : 'No'}</p>
-                    <OpenModalButton buttonText={'Update Barrel'} modalComponent={<UpdateBarrelForm state={{'lab_id': id,'barrel_id': barrel.id}} /> } />
-                    <OpenModalButton buttonText={"Delete Barrel"} modalComponent={<DeleteBarrelButton state={{'lab_id': id,'barrel_id': barrel.id}} />} />
+                    <OpenModalButton className={'button'} buttonText={'Update Barrel'} modalComponent={<UpdateBarrelForm state={{'lab_id': id,'barrel_id': barrel.id}} /> } />
+                    <OpenModalButton className={'button'} buttonText={"Delete Barrel"} modalComponent={<DeleteBarrelButton state={{'lab_id': id,'barrel_id': barrel.id}} />} />
                 </div>    
             ))}
-            <OpenModalButton buttonText={'Add Barrel'} modalComponent={<CreateBarrelForm state={lab} />}  />
+            <OpenModalButton className={'button'} buttonText={'Add Barrel'} modalComponent={<CreateBarrelForm state={lab}/>}  />
           
           
         </div>

@@ -98,7 +98,7 @@ const UpdateBarrelForm = (state) => {
       <label for="choice2">No</label>
     </div>
 
-				<button type="submit" className="submitButton">
+				<button type="submit" className="button">
 					Update Barrel
 				</button>
 			</form>

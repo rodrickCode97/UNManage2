@@ -14,7 +14,7 @@ function Navigation({ isLoaded }){
 			</li>
 			{isLoaded && (
 				<li>
-					<ProfileButton user={sessionUser} />
+					<ProfileButton user={sessionUser}  />
 				</li>
 			)}
 		</ul>

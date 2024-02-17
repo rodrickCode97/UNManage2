@@ -27,16 +27,14 @@ const Profile = () => {
     if (session.user) {
         user = session.user.username
     }
-    if(isLoading === true) return <h1> Loading </h1>
+    if(isLoading === true) return <img src='../../resources/images/flask.svg' alt='flask'/>
     return (
         <div className=' profile_container ld ld-blur-in'>
-            <h1>Hello {session.user ? user : ''}!</h1>
-            <OpenModalButton buttonText={'edit profile'} modalComponent={<UpdateProfileForm profile={profile} />} />
-            <OpenModalButton buttonText={'delete profile'} modalComponent={<DeleteProfile state={profile} />} />
+            <h1 className='profile_title'>Hello {session.user ? user : ''}!</h1>
+            <OpenModalButton className={'button'} buttonText={'edit profile'} modalComponent={<UpdateProfileForm profile={profile} />} />
+            <OpenModalButton className={'button'} buttonText={'delete profile'} modalComponent={<DeleteProfile profile={profile} />} />
             <Vendors />
-            <Labs/>
-       
-
+            <Labs />
         </div>
     )
 }

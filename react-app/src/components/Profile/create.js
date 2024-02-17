@@ -8,15 +8,16 @@ import "./profile.css";
 
 const CreateProfileForm = () => {
     const dispatch = useDispatch();
-    const profile = useSelector(state => state.profiles.profiles[0]);
+    const profile = useSelector(state => state.profiles.profiles);
+    const user = useSelector(state => state.session.user)
     const history = useHistory()
-    console.log(profile)
+    console.log(profile, user)
     
 
     //state 
     const [isEHS, setIsEHS] = useState();
     const [theme, setTheme] = useState();
-  
+    const [isLoading, setIsLoading] = useState(true)
     const [errors, setErrors] = useState('')
     const { closeModal } = useModal();
     
@@ -30,11 +31,14 @@ const CreateProfileForm = () => {
         is_EHS: parseInt(isEHS),
         theme
     }
+    useEffect(() => {
+        dispatch(readProfile()).then(()=> setIsLoading(false))
+    }, [dispatch])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({})
-        if(profile){
+        if(profile[0]){
             setErrors({ errors: "A profile for this user already exists" }) 
             return
         } 
@@ -49,10 +53,9 @@ const CreateProfileForm = () => {
 
     };
 
-    // useEffect(() => {
-    //     dispatch(readProfile())
-    // }, [dispatch])
-    
+    console.log(profile)
+
+    if(isLoading) return <img src='../../resources/images/flask.svg' alt='flask'/>
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="barrel_form_container">

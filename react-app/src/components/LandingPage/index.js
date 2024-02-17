@@ -5,6 +5,7 @@ import OpenModalButton from '../OpenModalButton';
 import { useHistory } from 'react-router-dom';
 import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
+import DemoUserButton from '../DemoUser';
 
 const Landing = () => {
     const dispatch = useDispatch();
@@ -17,9 +18,12 @@ const Landing = () => {
     return (
         <div className='landing_container'>
             <div className={'content'}>
-            <h1>UN-Manage 2</h1>
-            <OpenModalButton modalComponent={<SignupFormModal />} buttonText={'Sign Up'} />
-                <OpenModalButton modalComponent={<LoginFormModal />} buttonText={'Login'} />
+                <h1 className='title'>UN-Manage 2</h1>
+                <div className='buttons'>
+            <OpenModalButton  className={'button'}modalComponent={<SignupFormModal />} buttonText={'Sign Up'} />
+                <OpenModalButton  className={'button'} modalComponent={<LoginFormModal />} buttonText={'Login'} />
+                <DemoUserButton  />
+                </div>
             </div>
         </div>
     )
