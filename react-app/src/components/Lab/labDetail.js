@@ -18,14 +18,20 @@ const LabDetail = () => {
     const [isLoading, setIsLoading] = useState(true)
     let labsArr;
     let lab;
+    let tally = 0;
     useEffect(() => {
         dispatch(readLab()).then(() => setIsLoading(false))
     }, [dispatch])
-    if(labs) {
+    
+    if (labs) {
         labsArr = Object.values(labs);
         const currentLab = labsArr.filter(lab => lab.id === Number(id))
         lab = currentLab[0]
+        lab.barrels.forEach(barrel => {
+            if (barrel.is_full === true) tally += 1;
+        })
     }
+    console.log(tally)
     if(isLoading) return <img src='../../resources/images/flask.svg' alt='flask'/>
     return (
         <div className="ld ld-blur-in">
@@ -47,8 +53,9 @@ const LabDetail = () => {
                 </div>    
             ))}
             <OpenModalButton className={'button'} buttonText={'Add Barrel'} modalComponent={<CreateBarrelForm state={lab}/>}  />
-          
-          
+        <div className="tally">
+                <h2> {tally} full drums in this lab </h2>
+                </div>
         </div>
 )
 

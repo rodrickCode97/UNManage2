@@ -13,6 +13,7 @@ import { readLab } from '../../store/lab';
 import { readVendor } from '../../store/vendors';
 
 
+
 const Profile = () => {
     const dispatch = useDispatch();
     const ulRef = useRef();
@@ -27,7 +28,7 @@ const Profile = () => {
     if (session.user) {
         user = session.user.username
     }
-    if(isLoading === true) return <img src='../../resources/images/flask.svg' alt='flask'/>
+    if(isLoading === true) return <img src='https://loading.io/icon/3j4q0w' alt='flask'/>
     return (
         <div className=' profile_container ld ld-blur-in'>
             <h1 className='profile_title'>Hello {session.user ? user : ''}!</h1>
@@ -35,6 +36,8 @@ const Profile = () => {
             <OpenModalButton className={'button'} buttonText={'delete profile'} modalComponent={<DeleteProfile profile={profile} />} />
             <Vendors />
             <Labs />
+           
+            
         </div>
     )
 }
