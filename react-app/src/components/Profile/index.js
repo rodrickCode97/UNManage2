@@ -31,11 +31,15 @@ const Profile = () => {
     if(isLoading === true) return <img src='https://loading.io/icon/3j4q0w' alt='flask'/>
     return (
         <div className=' profile_container ld ld-blur-in'>
-            <h1 className='profile_title'>Hello {session.user ? user : ''}!</h1>
+            <h1 className='profile_title ld ld-spring-btt-in'>Hello {session.user ? user : ''}!</h1>
             <OpenModalButton className={'button'} buttonText={'edit profile'} modalComponent={<UpdateProfileForm profile={profile} />} />
             <OpenModalButton className={'button'} buttonText={'delete profile'} modalComponent={<DeleteProfile profile={profile} />} />
+            <div className="ld ld-rush-ttb-in">
             <Vendors />
+            </div>
+            <div className="ld ld-rush-btt-in">
             <Labs />
+            </div>
            
             
         </div>

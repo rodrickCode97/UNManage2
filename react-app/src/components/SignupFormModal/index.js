@@ -77,7 +77,7 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
-				<button type="submit">Sign Up</button>
+				<button className='button' type="submit">Sign Up</button>
 			</form>
 		</>
 	);

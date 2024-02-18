@@ -42,8 +42,10 @@ const LabDetail = () => {
             <h1>hi from Lab detail</h1>
             <h1>Building {lab.buildingNumber}, Rm {lab.roomNumber}</h1>
             <h2> barrels </h2>
+            <div className="lab_div">
+
             {lab.barrels.map(barrel => (
-                <div key={barrel.id}>
+                <div key={barrel.id} className="lab_button">
                    <h2>{barrel.wasteType} Barrel</h2>
                      <h3>Profile Number: {barrel.profileNumber}</h3>
                     <p>Waste Capacity: {barrel.wasteCapacity} Gallons </p>
@@ -52,6 +54,7 @@ const LabDetail = () => {
                     <OpenModalButton className={'button'} buttonText={"Delete Barrel"} modalComponent={<DeleteBarrelButton state={{'lab_id': id,'barrel_id': barrel.id}} />} />
                 </div>    
             ))}
+            </div>
             <OpenModalButton className={'button'} buttonText={'Add Barrel'} modalComponent={<CreateBarrelForm state={lab}/>}  />
         <div className="tally">
                 <h2> {tally} full drums in this lab </h2>

@@ -34,8 +34,8 @@ const DeleteProfile = (state) => {
     return (
         <div>
            <p>are you sure you want to delete this profile? </p> 
-            <button type='submit' onClick={handleDelete}> Delete Profile</button>
-            <button type='submit' onClick={cancelDelete}>Cancel</button>
+            <button type='submit' className='button' onClick={handleDelete}> Delete Profile</button>
+            <button type='submit' className='button' onClick={cancelDelete}>Cancel</button>
            
         </div>
     )

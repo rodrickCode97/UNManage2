@@ -39,7 +39,7 @@ const CreateBarrelForm = (state) => {
         e.preventDefault();
         setErrors({})
         try {
-            dispatch(createBarrel(lab_id, payload)).then(() => dispatch(readBarrel(lab_id))).then(()=> dispatch(readLab())).then(() => closeModal());
+          await  dispatch(createBarrel(lab_id, payload)).then(() => dispatch(readBarrel(lab_id))).then(()=> dispatch(readLab())).then(() => closeModal());
         } catch (data) {
             setErrors({ ...data })
         }
