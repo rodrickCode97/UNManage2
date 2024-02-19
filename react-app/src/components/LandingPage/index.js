@@ -7,6 +7,7 @@ import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
 import DemoUserButton from '../DemoUser';
 
+
 const Landing = () => {
     const dispatch = useDispatch();
     const ulRef = useRef();
@@ -22,7 +23,8 @@ const Landing = () => {
                 <div className='buttons'>
             <OpenModalButton  className={'button'}modalComponent={<SignupFormModal />} buttonText={'Sign Up'} />
                 <OpenModalButton  className={'button'} modalComponent={<LoginFormModal />} buttonText={'Login'} />
-                <DemoUserButton  />
+                    <DemoUserButton />
+                  
                 </div>
             </div>
         </div>

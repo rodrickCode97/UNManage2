@@ -10,7 +10,7 @@
 } 
 
 .button{
-    background: rgb(59, 60, 59);
+  background: url('../src/resources/images/Raindrop-3.3s-1084px.svg');
 	color: inherit;
     text-align: center;
     border: solid 1px #2d2c2c;
