@@ -35,7 +35,7 @@ const UpdateVendorForm = (state) => {
         e.preventDefault();
         setErrors({})
         try {
-            await dispatch(updateVendor(parseInt(id), payload)).then(() => dispatch(readVendor()));
+            await dispatch(updateVendor(parseInt(id), payload)).then(() => dispatch(readVendor())).then(()=> closeModal());
         } catch (data) {
             setErrors({ ...data });
          

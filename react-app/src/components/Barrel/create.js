@@ -5,6 +5,8 @@ import { useModal } from "../../context/Modal";
 import { useParams } from "react-router-dom";
 import { readLab } from "../../store/lab";
 import "./barrel.css";
+import Select from 'react-select'
+
 
 const CreateBarrelForm = (state) => {
     const dispatch = useDispatch();
@@ -13,11 +15,9 @@ const CreateBarrelForm = (state) => {
   
 
     //state 
-    const [profileNumber, setProfileNumber] = useState('');
-    const [buildingNumber, setBuildingNumber] = useState();
-    const [roomNumber, setRoomNumber] = useState();
-    const [wasteType, setWasteType] = useState();
-    const [wasteCapacity, setWasteCapacity] = useState();
+    const [profileNumber, setProfileNumber] = useState('UN1993');
+    const [wasteType, setWasteType] = useState('Solvent');
+    const [wasteCapacity, setWasteCapacity] = useState(55);
     const [errors, setErrors] = useState('')
     const { closeModal } = useModal();
     
@@ -57,7 +57,7 @@ const CreateBarrelForm = (state) => {
 		<div>
 			<form onSubmit={handleSubmit} className="barrel_form_container">
 				{errors && <p>{errors.errors}</p>}
-				<input
+				{/* <input
 					className="barrel_form_input"
 					type="text"
 					value={profileNumber}
@@ -65,26 +65,45 @@ const CreateBarrelForm = (state) => {
 					name="profileNumber"
 					placeholder="Enter Profile Number... ex. UN1993"
 					required
-                />
-                <input
-					className="barrel_form_input"
-					type="text"
-					value={wasteType}
-					onChange={handleWasteType}
-					name="wasteType"
-					placeholder="Enter Waste Type... ex. Solvent"
-					required
-                />
-                <input
-					className="barrel_form_input"
-					type="text"
-					value={wasteCapacity}
-					onChange={handleWasteCapacity}
-					name="WasteCapacity"
-					placeholder="Enter Barrel Size... ex. 55"
-					required
-                />
-                <p> Gallons</p>
+                // /> */}
+              
+                   <label>
+        Choose a profile:
+        <select
+          value={profileNumber}
+          onChange={handleProfileNumber}
+        >
+          <option value="UN1993"> UN1993 </option>
+          <option value="UN3082"> UN3082 </option>
+          <option value="UN3064"> UN3064 </option>
+          <option value="UN3062"> UN3062 </option>      
+        </select>
+        </label>
+        <label>
+        Choose a Waste Type:
+        <select
+          value={wasteType}
+          onChange={handleWasteType}
+        >
+          <option value="Solvent">Solvent</option>
+          <option  value="Aqueous">Aqueous</option>
+          <option value="Acid">Acid</option>
+          <option value="Base">Base</option>      
+          <option value="Flammable Corrosive">Flammable Corrosive</option>      
+          <option value="HPLC">HPLC Solid</option>      
+        </select>
+                </label>
+                <label>
+        Choose a Barrel Size:
+        <select
+          value={wasteCapacity}
+          onChange={handleWasteCapacity}
+        >
+          <option value='55'> 55 Gallons </option>
+          <option value={35}> 35 Gallons </option>
+          <option value={25}> 25 Gallons </option>   
+        </select>
+                </label>
 				<button type="submit" className="submitButton">
 					Add Barrel
 				</button>

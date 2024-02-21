@@ -1,5 +1,7 @@
 .landing_container{
     background:url('../../resources/images/landing.svg');
+    /* background:url('../../resources/images/cyber.svg'); */
+
 	background-attachment: absolute;
 	background-size: cover;
 	height: 100vh; 
