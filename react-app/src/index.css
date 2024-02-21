@@ -1,1 +1,48 @@
 /* TODO Add site wide styles */
+ body{
+    background:url('./resources/images/ocean3.svg');
+ background-attachment: absolute;
+ background-size: cover;
+ height: 100vh; 
+ width: 100vw;;
+    margin: 0;
+   
+} 
+
+.button{
+  background: url('../src/resources/images/Raindrop-3.3s-1084px.svg');
+	color: inherit;
+    text-align: center;
+    border: solid 1px #2d2c2c;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    padding: 3px;
+    margin: 1px;
+    border-radius: 5px;
+   
+
+  
+}
+p{
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.button, h1, h2, h3 {
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.button:hover, input:focus-within{
+    transform: scale(1.1);
+    box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
+}
+input {
+    background: rgb(59, 60, 59);
+    border-radius: 5px;
+    border: solid 1px #2d2c2c;
+}
+

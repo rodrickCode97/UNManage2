@@ -1,7 +1,13 @@
 .profile-dropdown {
   position: absolute;
+  z-index: 100;
 }
 
 .hidden {
   display: none;
+}
+
+ul {
+  border-bottom: 2px solid rgba(100, 100, 100, .3);
+  padding-bottom: 15px;
 }

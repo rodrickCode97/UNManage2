@@ -1,0 +1,78 @@
+.vendor_container {
+ background: rgba(41, 41, 41, 0.3);
+ /* border: 2px solid black; */
+border-radius: 20px;
+transition: all ease 0.2s;
+/* margin: 2px 10px; */
+width: 50vw;
+padding-bottom: 1.5%;
+
+}
+.vendors{
+    display: flex;
+    justify-content: space-around;
+    flex-direction:row;
+   width: 100%;
+   font-family: "Lexend Deca", sans-serif;
+   font-optical-sizing: auto;
+   font-style: normal;
+}
+
+.vendors_button {
+	background: none;
+	color: inherit;
+    text-align: center;
+
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    padding-bottom: 34px;
+    width: 250px; 
+    border-radius: 20px;
+    margin: 0 7px;
+    transition: all ease 0.2s;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+    background: url('../../resources/images/Gooey-3.3s-1084px.svg');
+   
+}
+
+
+.vendors_button:hover, .add_vendor:hover{
+    transform: scale(1.1);
+  box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
+}
+
+.add_vendor{
+    width: 125px;
+    background: url('../../resources/images/Gooey-3.3s-1084px.svg');
+	color: inherit;
+    border: solid 1px #292929;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    border-radius: 20px;
+    margin: 5px;
+    transition: all ease 0.2s;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3)
+}
+
+.ven_button {
+    background: none;
+	color: inherit;
+    border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    text-align: center;
+    height: 100%;
+    width: 100%
+}
+
+.vendor_modal {
+    width: 60vw;
+    height: 60vh;
+   
+}
