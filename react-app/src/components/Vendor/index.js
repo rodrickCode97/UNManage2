@@ -24,7 +24,7 @@ const Vendors = () => {
     if (vendors) {
          vendorsArr = Object.values(vendors) 
     }
-    console.log(vendorsArr)
+ 
     if(isLoading) return <img src='../../resources/images/flask.svg' alt='flask'/>
     return (
         <div className='vendor_container'>

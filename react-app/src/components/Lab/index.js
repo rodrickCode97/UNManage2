@@ -14,7 +14,7 @@ const Labs = () => {
     const history = useHistory();
     const labs = useSelector(state => state.lab.labs);
     let labsArr;
-    console.log(labs);
+
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         dispatch(readLab()).then(()=> setIsLoading(false))

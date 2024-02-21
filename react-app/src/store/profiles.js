@@ -83,7 +83,7 @@ export const deleteProfile = (profile_id) => async (dispatch) => {
         const res = await fetch(`/api/profiles/${profile_id}`,{method: "DELETE"});
         if (res.ok) {
             const data = await res.json();
-            console.log(data, profile_id)
+           
             dispatch(deleted(profile_id)) //might be data if error
             return data
         }

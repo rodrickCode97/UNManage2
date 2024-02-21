@@ -3,8 +3,7 @@ import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
-import { readProfile } from "../../store/profiles";
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -17,11 +16,11 @@ function LoginFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
-    history.push('/profiles/dashboard')
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
+      closeModal();
+      history.push('/profiles/dashboard')
     }
   };
 
@@ -52,7 +51,7 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button className="button" type="submit">Log In</button>
+        <button type="submit">Log In</button>
       </form>
     </>
   );
