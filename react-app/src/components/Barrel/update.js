@@ -12,7 +12,7 @@ const UpdateBarrelForm = (state) => {
     const { lab_id, barrel_id } = state.state ;
     const labId = parseInt(lab_id)
     const barrelId = parseInt(barrel_id);
-    console.log(barrel_id, labId)
+
 
 
     //state 

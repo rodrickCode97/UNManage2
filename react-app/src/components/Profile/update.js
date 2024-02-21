@@ -5,10 +5,7 @@ import { useModal } from "../../context/Modal";
 import "./profile.css";
 const UpdateProfileForm = (profile) => {
     const dispatch = useDispatch();
- 
-    console.log(profile)
     const { id } = profile.profile[0]
-    console.log(id)
     const profile_id = parseInt(id)
  
 

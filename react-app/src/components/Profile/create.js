@@ -11,7 +11,7 @@ const CreateProfileForm = () => {
     const profile = useSelector(state => state.profiles.profiles);
     const user = useSelector(state => state.session.user)
     const history = useHistory()
-    console.log(profile, user)
+
     
 
     //state 
@@ -53,7 +53,7 @@ const CreateProfileForm = () => {
 
     };
 
-    console.log(profile)
+
 
     if(isLoading) return <img src='../../resources/images/flask.svg' alt='flask'/>
 	return (

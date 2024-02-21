@@ -8,11 +8,11 @@ import { useModal } from '../../context/Modal';
 
 
 const DeleteProfile = (state) => {
-    console.log(state)
+   
     const {id} = state.profile[0];
     const profile_id = parseInt(id)
     const {closeModal} = useModal()
-    console.log(id)
+   
   
     const dispatch = useDispatch();
     const ulRef = useRef();

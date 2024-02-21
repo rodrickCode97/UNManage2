@@ -8,7 +8,7 @@ import { useModal } from '../../context/Modal';
 
 
 const DeleteVendorButton = (state) => {
-    console.log(state)
+   
     const id  = state.state
     const { closeModal } = useModal();
     const vendorId = parseInt(id)

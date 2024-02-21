@@ -8,7 +8,7 @@ import "./lab.css";
 const UpdateLabForm = (state) => {
     const dispatch = useDispatch();
     const lab_id = parseInt(state.state)
-    console.log(lab_id)
+
 
     //state 
     const [profileNumber, setProfileNumber] = useState('');
@@ -37,7 +37,7 @@ const UpdateLabForm = (state) => {
         try {
           await dispatch(updateLab(lab_id, payload)).then(() => dispatch(readLab())).then(() => closeModal());
         } catch (data) {
-            console.log(data)
+          
             setErrors({ ...data });
         }
         setBuildingNumber(buildingNumber)
