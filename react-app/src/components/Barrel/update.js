@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from "react";
-import { useDispatch, useSelector, } from "react-redux";
-import { createBarrel, readBarrel, updateBarrel } from "../../store/barrels";
+import { useDispatch } from "react-redux";
+import { readBarrel, updateBarrel } from "../../store/barrels";
 import { useModal } from "../../context/Modal";
-import { useParams, useHistory } from "react-router-dom";
+
 import "./barrel.css";
 import { readLab } from "../../store/lab";
 
 const UpdateBarrelForm = (state) => {
     const dispatch = useDispatch();
-   const history = useHistory()
+
     const { lab_id, barrel_id } = state.state ;
     const labId = parseInt(lab_id)
-    const barrelId = parseInt(barrel_id);
-
+    
 
 
     //state 
@@ -61,35 +60,7 @@ const UpdateBarrelForm = (state) => {
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="barrel_form_container">
-				{errors && <p>{errors.errors}</p>}
-				{/* <input
-					className="barrel_form_input"
-					type="text"
-					value={profileNumber}
-					onChange={handleProfileNumber}
-					name="profileNumber"
-					placeholder="Enter Profile Number... ex. UN1993"
-					required
-                />
-                <input
-					className="barrel_form_input"
-					type="text"
-					value={wasteType}
-					onChange={handleWasteType}
-					name="wasteType"
-					placeholder="Enter Waste Type... ex. Solvent"
-					required
-                />
-                <input
-					className="barrel_form_input"
-					type="text"
-					value={wasteCapacity}
-					onChange={handleWasteCapacity}
-					name="WasteCapacity"
-					placeholder="Enter Barrel Size... ex. 55"
-					required
-                /> */}
-                          
+				{errors && <p>{errors.errors}</p>}      
                    <label>
         Choose a profile:
         <select

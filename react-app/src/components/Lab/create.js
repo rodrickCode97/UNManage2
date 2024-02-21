@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import { useDispatch, useSelector, } from "react-redux";
+import React, {useState} from "react";
+import { useDispatch} from "react-redux";
 import { readLab, createLab } from "../../store/lab"
 import { useModal } from "../../context/Modal";
 import { useParams } from "react-router-dom";

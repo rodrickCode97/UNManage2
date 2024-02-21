@@ -27,7 +27,6 @@ const deleted = (payload) => ({
 })
 
 export const createProfile = (payload) => async (dispatch) => {
-    console.log(payload)
     try {
         const res = await fetch(`/api/profiles`, {
             method: "POST",
@@ -79,7 +78,7 @@ export const updateProfile = (profile_id, payload) => async (dispatch) => {
 }
 
 export const deleteProfile = (profile_id) => async (dispatch) => {
-    console.log(profile_id)
+
         const res = await fetch(`/api/profiles/${profile_id}`,{method: "DELETE"});
         if (res.ok) {
             const data = await res.json();

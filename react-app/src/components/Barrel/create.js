@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from "react";
-import { useDispatch, useSelector, } from "react-redux";
+import React, {useState} from "react";
+import { useDispatch } from "react-redux";
 import { createBarrel, readBarrel } from "../../store/barrels";
 import { useModal } from "../../context/Modal";
-import { useParams } from "react-router-dom";
 import { readLab } from "../../store/lab";
 import "./barrel.css";
-import Select from 'react-select'
+
 
 
 const CreateBarrelForm = (state) => {
