@@ -58,10 +58,10 @@ def update_lab(lab):
     current_lab = Lab.query.get(lab)
 
     if not current_lab:
-        return jsonify({"message": "Lab not found"}), 400
+        return jsonify({"errors": "Lab not found"}), 400
 
     if  not current_profile[0].is_EHS:
-       return jsonify({'message': "unauthorized"}), 400
+       return jsonify({'errors': "unauthorized"}), 400
 
     form = LabForm()
 
@@ -86,10 +86,10 @@ def delete_lab(labId):
 
 
     if not current_lab:
-        return jsonify({'message': "Lab not found"}), 400
+        return jsonify({'errors': "Lab not found"}), 400
     
     if not current_profile[0].is_EHS:
-        return  jsonify({'message': 'action Unauthorized'}), 400
+        return  jsonify({'errors': 'action Unauthorized'}), 400
     
     db.session.delete(current_lab)
     db.session.commit()

@@ -92,11 +92,11 @@ def delete_barrel(lab_id, barrel_id):
     current_profile = [profile for profile in profiles]
 
     if not current_barrel:
-        return jsonify({"message": "Barrel not found"}), 400
+        return jsonify({"errors": "Barrel not found"}), 400
 
     if not current_profile[0].is_EHS:
-        return jsonify({'message': 'action Unauthorized'}), 400
+        return jsonify({'errors': 'action Unauthorized'}), 400
     
     db.session.delete(current_barrel)
     db.session.commit()
-    return jsonify({'Message': "successfully deleted!"})
+    return jsonify({'Message': "successfully deleted!"}), 200
