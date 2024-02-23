@@ -24,7 +24,7 @@ function App() {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  const showNavbar = !["/", "/signup"].includes(location.pathname);
+  const showNavbar = !["/", "/signup", '/profiles'].includes(location.pathname);
 
   return (
     <div className="app">
