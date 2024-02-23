@@ -13,7 +13,11 @@ const Labs = () => {
     const ulRef = useRef();
     const history = useHistory();
     const labs = useSelector(state => state.lab.labs);
+    const profiles = useSelector(state => state.profiles.profiles)
+   
     let labsArr;
+    let profile;
+    let profileEhs;
 
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
@@ -22,16 +26,23 @@ const Labs = () => {
     if (labs) {
      labsArr = Object.values(labs); 
     }
+    if (profiles) {
+        profile = profiles[0];
+        profileEhs = profile.is_EHS;
+    }
+
+   
+
     if(isLoading) return <img src='/react-app/src/resources/images/flask.svg' alt='flask'/>
     return (
         <div className='lab_container'>
         <h1>Hello From Labs</h1>
             <p> Labs </p>
             <div className='lab_div'> 
-            <OpenModalButton modalComponent={< CreateLabForm />} buttonText={'Add Lab'}  className={'lab_button'}/>
+          {profileEhs &&  <OpenModalButton modalComponent={< CreateLabForm />} buttonText={'Add Lab'}  className={'lab_button'}/>}
             {labsArr.map(lab => (
                 <div key={lab.id}className='lab_button'>
-                   <NavLink exact to={`/labs/${lab.id}`} className={'lab_b'}> <div>
+                   <NavLink exact to={`/labs/${lab.id}`} className={'link'} > <div className={'lab_b'}>
                         <p>Building {lab.buildingNumber}, Room {lab.roomNumber}</p>
                         </div></NavLink>
                     </div>

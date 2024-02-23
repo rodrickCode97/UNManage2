@@ -20,8 +20,15 @@
     text-decoration: none;
     font: inherit;
     color: inherit;
+    border: 3px solid rgba(0, 0, 0, 0);
+    width: 100%;
 }
+.link{
+    text-decoration: none;
+    font: inherit;
+    color: inherit;
 
+} 
 
 .lab_button {
 	background: url('../../resources/images/Gooey-3.3s-1084px.svg');

@@ -27,7 +27,7 @@ padding-bottom: 1.5%;
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
-    padding-bottom: 34px;
+    /* padding-bottom: 34px; */
     width: 250px; 
     border-radius: 20px;
     margin: 0 7px;
@@ -68,11 +68,12 @@ padding-bottom: 1.5%;
 	outline: inherit;
     text-align: center;
     height: 100%;
-    width: 100%
+    width: 100%;
 }
 
 .vendor_modal {
-    width: 60vw;
-    height: 60vh;
-   
+    /* width: 60vw;
+    height: 60vh; */
+    width: 100%;
+    height: 50px;
 }

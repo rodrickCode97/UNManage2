@@ -49,7 +49,7 @@ const CreateVendorForm = () => {
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="vendor_form_container">
-				{errors && <p>{errors.message}</p>}
+				{errors && <p>{errors.errors}</p>}
 				<input
 					className="vendor_form_input"
 					type="text"

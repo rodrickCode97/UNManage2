@@ -8,6 +8,7 @@ import "./lab.css";
 const UpdateLabForm = (state) => {
     const dispatch = useDispatch();
     const lab_id = parseInt(state.state)
+    let splitErrors;
 
 
     //state 
@@ -37,39 +38,38 @@ const UpdateLabForm = (state) => {
         try {
           await dispatch(updateLab(lab_id, payload)).then(() => dispatch(readLab())).then(() => closeModal());
         } catch (data) {
-          
             setErrors({ ...data });
-        }
+        } 
         setBuildingNumber(buildingNumber)
         setRoomNumber(roomNumber)
-      
-
     };
 
     useEffect(() => {
         dispatch(readLab())
-    }, [dispatch, lab_id])
+    }, [dispatch])
+
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="barrel_form_container">
-				{errors && <p>{errors.errors}</p>}
+                {errors && <p>{errors.errors}</p>}
+				
 				
                 <input
 					className="barrel_form_input"
-					type="text"
+					type="number"
 					value={buildingNumber}
 					onChange={handleBuildingNumber}
 					name="BuildingNumber"
-					placeholder="Enter Building Number... ex. 7"
+					placeholder={7}
 					required
                 />
                 <input
 					className="barrel_form_input"
-					type="text"
+					type="number"
 					value={roomNumber}
 					onChange={handleRoomNumber}
 					name="RoomNumber"
-					placeholder="Enter Room Number... ex. 19"
+					placeholder={1}
 					required
                 />
 				<button type="submit" className="submitButton">

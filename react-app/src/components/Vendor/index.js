@@ -15,7 +15,10 @@ const Vendors = () => {
     const ulRef = useRef();
     const history = useHistory();
     const vendors = useSelector(state => state.vendors.vendors); 
+    const profiles = useSelector(state => state.profiles.profiles)
     let vendorsArr;
+    let profile;
+    let profileEhs;
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         dispatch(readVendor()).then(() => setIsLoading(false))
@@ -24,6 +27,10 @@ const Vendors = () => {
     if (vendors) {
          vendorsArr = Object.values(vendors) 
     }
+    if (profiles) {
+        profile = profiles[0];
+        profileEhs = profile.is_EHS;
+    }
  
     if(isLoading) return <img src='../../resources/images/flask.svg' alt='flask'/>
     return (
@@ -31,10 +38,12 @@ const Vendors = () => {
             <h1>Hello From Vendors</h1>
             <p> Current Vendors:</p>
             <div className='vendors'>  
-            <OpenModalButton buttonText={'Add Vendor'} modalComponent={<CreateVendorForm  />} className='add_vendor' />
+            { profileEhs && <OpenModalButton buttonText={'Add Vendor'} modalComponent={<CreateVendorForm  />} className='add_vendor' />}
             {vendorsArr.map(vendor => (
                 <div key={vendor.id} className='vendors_button'>
-                    <OpenModalButton buttonText={vendor.name} modalComponent={<VendorDetail state={vendor.id} className={'vendor_modal'} />} className={'ven_button'}/>
+                    <div className='vendor_modal'>
+                        <OpenModalButton buttonText={vendor.name} modalComponent={<VendorDetail state={vendor.id}  />} className={'ven_button'} />
+                        </div>
                     </div>
             ))}
             </div>

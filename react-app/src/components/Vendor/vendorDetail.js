@@ -12,15 +12,23 @@ import './vendor.css'
 const VendorDetail = (state) => {
     const  id  = state.state;
     const vendors = useSelector(state => state.vendors.vendors)
+    const profiles = useSelector(state => state.profiles.profiles)
+    let profile;
+    let profileEhs;
+    if (profiles) {
+      profile = profiles[0];
+       profileEhs = profile.is_EHS;
+    }
+    console.log(profileEhs)
     const vendorsArr = Object.values(vendors);
     const currentVendor = vendorsArr.filter(vendor => vendor.id === Number(id))
     const vendor= currentVendor[0]
     return (
         <div className={"vendor_container"}>
-            <div>
+          {profileEhs &&  <div>
                 <OpenModalButton className={'button'} buttonText={'Update Vendor'} modalComponent={<UpdateVendorForm state={id} />} />
                 <OpenModalButton className={'button'} buttonText={'Delete Vendor'} modalComponent={<DeleteVendorButton state={id} />} />
-            </div>
+            </div>}
             <h1>hi from Vendor detail</h1>
             <h1> {vendor.name}, </h1>
             <h2> Phone: {vendor.phoneNumber}</h2>

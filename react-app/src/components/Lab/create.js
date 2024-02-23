@@ -55,20 +55,20 @@ const CreateLabForm = () => {
 				
                 <input
 					className="barrel_form_input"
-					type="text"
+					type="number"
 					value={buildingNumber}
 					onChange={handleBuildingNumber}
 					name="BuildingNumber"
-					placeholder="Enter Building Number... ex. 7"
+					placeholder={7}
 					required
                 />
                 <input
 					className="barrel_form_input"
-					type="text"
+					type="number"
 					value={roomNumber}
 					onChange={handleRoomNumber}
 					name="RoomNumber"
-					placeholder="Enter Room Number... ex. 19"
+					placeholder={1}
 					required
                 />
 				<button type="submit" className="submitButton">
