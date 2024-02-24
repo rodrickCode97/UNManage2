@@ -8,16 +8,17 @@ import { readLab } from "../../store/lab";
 
 const UpdateBarrelForm = (state) => {
     const dispatch = useDispatch();
+    const { lab_id, barrel_id, barrels} = state.state ;
+  const labId = parseInt(lab_id)
 
-    const { lab_id, barrel_id } = state.state ;
-    const labId = parseInt(lab_id)
-    
+  const currentBarrel = barrels.find(barrel => barrel.id === barrel_id);
+
 
 
     //state 
-    const [profileNumber, setProfileNumber] = useState('UN1993');
-    const [wasteType, setWasteType] = useState('Solvent');
-    const [wasteCapacity, setWasteCapacity] = useState(55);
+    const [profileNumber, setProfileNumber] = useState(currentBarrel.profileNumber);
+    const [wasteType, setWasteType] = useState(currentBarrel.wasteType);
+    const [wasteCapacity, setWasteCapacity] = useState(currentBarrel.wasteCapacity);
     const [is_full, setIs_full] = useState()
     const [errors, setErrors] = useState('')
     const { closeModal } = useModal();
@@ -40,10 +41,11 @@ const UpdateBarrelForm = (state) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErrors({})
         try {
-
-        dispatch(updateBarrel(labId, barrel_id, payload)).then(() => dispatch(readBarrel(lab_id))).then(()=> dispatch(readLab())).then(() => closeModal());
+          
+         await dispatch(updateBarrel(labId, barrel_id, payload)).then(() => dispatch(readBarrel(lab_id))).then(() => dispatch(readLab()));
+          closeModal()
+          setErrors({})
         } catch (data) {
             setErrors({ ...data });
             
@@ -83,7 +85,7 @@ const UpdateBarrelForm = (state) => {
           <option value="Aqueous">Aqueous</option>
           <option value="Acid">Acid</option>
           <option value="Base">Base</option>      
-          <option value="Flammable_Corrosive">Flammable Corrosive</option>      
+          <option value={`Flammable Corrosive`}>Flammable Corrosive</option>      
           <option value="HPLC">HPLC Solid</option>      
         </select>
                 </label>

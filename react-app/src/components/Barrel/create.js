@@ -55,17 +55,7 @@ const CreateBarrelForm = (state) => {
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="barrel_form_container">
-				{errors && <p>{errors.errors}</p>}
-				{/* <input
-					className="barrel_form_input"
-					type="text"
-					value={profileNumber}
-					onChange={handleProfileNumber}
-					name="profileNumber"
-					placeholder="Enter Profile Number... ex. UN1993"
-					required
-                // /> */}
-              
+				{errors && <p>{errors.errors}</p>}    
                    <label>
         Choose a profile:
         <select
@@ -88,7 +78,7 @@ const CreateBarrelForm = (state) => {
           <option  value="Aqueous">Aqueous</option>
           <option value="Acid">Acid</option>
           <option value="Base">Base</option>      
-          <option value="Flammable Corrosive">Flammable Corrosive</option>      
+          <option value={`Flammable Corrosive`}>Flammable Corrosive</option>      
           <option value="HPLC">HPLC Solid</option>      
         </select>
                 </label>
@@ -98,7 +88,7 @@ const CreateBarrelForm = (state) => {
           value={wasteCapacity}
           onChange={handleWasteCapacity}
         >
-          <option value='55'> 55 Gallons </option>
+          <option value={55}> 55 Gallons </option>
           <option value={35}> 35 Gallons </option>
           <option value={25}> 25 Gallons </option>   
         </select>

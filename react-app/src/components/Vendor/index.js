@@ -9,6 +9,7 @@ import CreateVendorForm from './create';
 import DeleteVendorButton from './delete';
 import UpdateVendorForm from './update';
 import VendorDetail from './vendorDetail';
+import Loading from '../Loading';
 
 const Vendors = () => {
     const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const Vendors = () => {
         profileEhs = profile.is_EHS;
     }
  
-    if(isLoading) return <img src='../../resources/images/flask.svg' alt='flask'/>
+    if(isLoading) return <Loading />
     return (
         <div className='vendor_container'>
             <h1>Hello From Vendors</h1>

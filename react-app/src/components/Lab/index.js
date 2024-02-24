@@ -5,6 +5,7 @@ import OpenModalButton from '../OpenModalButton';
 import { useHistory, NavLink } from 'react-router-dom';
 import { readLab } from '../../store/lab';
 import CreateLabForm from './create';
+import { readProfile } from '../../store/profiles';
 
 
 
@@ -21,7 +22,7 @@ const Labs = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        dispatch(readLab()).then(()=> setIsLoading(false))
+        dispatch(readProfile()).then(() => dispatch(readLab())).then(()=> setIsLoading(false))
     }, [dispatch])
     if (labs) {
      labsArr = Object.values(labs); 

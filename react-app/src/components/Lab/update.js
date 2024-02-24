@@ -7,16 +7,15 @@ import "./lab.css";
 
 const UpdateLabForm = (state) => {
     const dispatch = useDispatch();
-    const lab_id = parseInt(state.state)
-    let splitErrors;
+    const lab_id = parseInt(state.state.labId)
+    const lab = state.state.lab;
+ 
 
 
     //state 
-    const [profileNumber, setProfileNumber] = useState('');
-    const [buildingNumber, setBuildingNumber] = useState();
-    const [roomNumber, setRoomNumber] = useState();
-    const [wasteType, setWasteType] = useState();
-    const [wasteCapacity, setWasteCapacity] = useState();
+  
+    const [buildingNumber, setBuildingNumber] = useState(lab.buildingNumber);
+    const [roomNumber, setRoomNumber] = useState(lab.roomNumber);
     const [errors, setErrors] = useState('')
     const { closeModal } = useModal();
     
@@ -60,7 +59,6 @@ const UpdateLabForm = (state) => {
 					value={buildingNumber}
 					onChange={handleBuildingNumber}
 					name="BuildingNumber"
-					placeholder={7}
 					required
                 />
                 <input
@@ -69,7 +67,6 @@ const UpdateLabForm = (state) => {
 					value={roomNumber}
 					onChange={handleRoomNumber}
 					name="RoomNumber"
-					placeholder={1}
 					required
                 />
 				<button type="submit" className="submitButton">

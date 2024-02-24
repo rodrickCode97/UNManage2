@@ -10,6 +10,7 @@ import DeleteVendorButton from "./delete";
 import './vendor.css'
 
 const VendorDetail = (state) => {
+  
     const  id  = state.state;
     const vendors = useSelector(state => state.vendors.vendors)
     const profiles = useSelector(state => state.profiles.profiles)
@@ -26,7 +27,7 @@ const VendorDetail = (state) => {
     return (
         <div className={"vendor_container"}>
           {profileEhs &&  <div>
-                <OpenModalButton className={'button'} buttonText={'Update Vendor'} modalComponent={<UpdateVendorForm state={id} />} />
+                <OpenModalButton className={'button'} buttonText={'Update Vendor'} modalComponent={<UpdateVendorForm state={{id: id, vendor:vendor}} />} />
                 <OpenModalButton className={'button'} buttonText={'Delete Vendor'} modalComponent={<DeleteVendorButton state={id} />} />
             </div>}
             <h1>hi from Vendor detail</h1>

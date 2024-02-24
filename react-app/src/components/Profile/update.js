@@ -11,7 +11,7 @@ const UpdateProfileForm = (profile) => {
 
     //state 
     const [isEHS, setIsEHS] = useState();
-    const [theme, setTheme] = useState();
+    const [theme, setTheme] = useState('red');
   
     const [errors, setErrors] = useState('')
     const { closeModal } = useModal();
@@ -59,15 +59,18 @@ const UpdateProfileForm = (profile) => {
                     No
                     </label>
         </label>
-                <input
-					className="profile_form_input"
-					type="text"
-					value={theme}
-					onChange={handleTheme}
-					name="Theme"
-					placeholder="Enter a Theme... ex. red"
-					required
-                />
+        <label>
+        Choose a profile theme:
+        <select
+          value={theme}
+          onChange={handleTheme}
+        >
+          <option value="red"> Red </option>
+          <option value="green"> Green</option>
+          <option value="purple"> purple </option>
+          <option value="blue"> Blue</option>      
+        </select>
+        </label>
 				<button type="submit" className="submitButton">
 					Update Profile
 				</button>

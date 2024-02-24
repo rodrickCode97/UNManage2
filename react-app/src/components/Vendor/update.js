@@ -8,14 +8,13 @@ import "./vendor.css";
 
 const UpdateVendorForm = (state) => {
     const dispatch = useDispatch();
+    const { id, vendor } = state.state;
     //state 
-    const [name, setName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
+    const [name, setName] = useState(vendor.name);
+    const [phoneNumber, setPhoneNumber] = useState(vendor.phoneNumber);
+    const [email, setEmail] = useState(vendor.email);
     const [errors, setErrors] = useState('')
     const { closeModal } = useModal();
-    const  id  = state.state;
-    
     
     // handles
     const handleName = e => setName(e.target.value);
@@ -33,16 +32,16 @@ const UpdateVendorForm = (state) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErrors({})
         try {
             await dispatch(updateVendor(parseInt(id), payload)).then(() => dispatch(readVendor())).then(()=> closeModal());
+            setErrors({})
         } catch (data) {
-            setErrors({ ...data });
+            setErrors(data.errors);
          
         }
-        setName('')
-        setPhoneNumber('')
-        setEmail('')
+        setName(vendor.name)
+        setPhoneNumber(vendor.phoneNumber)
+        setEmail(vendor.email)
 
     };
 
@@ -52,14 +51,13 @@ const UpdateVendorForm = (state) => {
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="vendor_form_container">
-				{errors && <p>{errors.errors}</p>}
+            {errors && errors.map(error => <p>{error}</p>)}
 				<input
 					className="vendor_form_input"
 					type="text"
 					value={name}
 					onChange={handleName}
 					name="name"
-					placeholder="Enter Name"
 					required
                 />
                 <input
@@ -68,7 +66,6 @@ const UpdateVendorForm = (state) => {
 					value={phoneNumber}
 					onChange={handlePhoneNumber}
 					name="phoneNumber"
-					placeholder="Enter Phone Number"
 					required
                 />
                 <input

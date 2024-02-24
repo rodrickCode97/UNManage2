@@ -16,7 +16,8 @@ const DeleteBarrelButton = (state) => {
     const [isLoading, setIsLoading] = useState(true);
     const handleDelete = e => {
         e.preventDefault();
-   dispatch(deleteBarrel(labId, barrelId)).then(() => dispatch(readBarrel(labId))).then(()=> dispatch(readLab())).then(()=> closeModal());
+        dispatch(deleteBarrel(labId, barrelId)).then(() => dispatch(readBarrel(labId))).then(() => dispatch(readLab()));
+        closeModal();
     }
 
     const handleCancel = e => {

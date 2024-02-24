@@ -11,6 +11,7 @@ import DeleteProfile from './delete';
 import Labs from '../Lab';
 import { readLab } from '../../store/lab';
 import { readVendor } from '../../store/vendors';
+import Loading from '../Loading';
 
 
 
@@ -28,7 +29,7 @@ const Profile = () => {
     if (session.user) {
         user = session.user.username
     }
-    if(isLoading === true) return <img src='https://loading.io/icon/3j4q0w' alt='flask'/>
+    if(isLoading === true) return <Loading />
     return (
         <div className=' profile_container ld ld-blur-in'>
             <h1 className='profile_title ld ld-spring-btt-in'>Hello {session.user ? user : ''}!</h1>

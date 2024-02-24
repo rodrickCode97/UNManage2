@@ -7,6 +7,7 @@ import "./vendor.css";
 
 const CreateVendorForm = () => {
     const dispatch = useDispatch();
+
     //state 
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -30,12 +31,13 @@ const CreateVendorForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErrors({})
         try {
             await dispatch(createVendor(payload)).then(() => dispatch(readVendor())).then(() => closeModal());
+            setErrors({})
         } catch (data) {
-            setErrors({ ...data });
-        
+         
+            setErrors(data.errors);
+            
         }
         setName('')
         setPhoneNumber('')
@@ -47,9 +49,9 @@ const CreateVendorForm = () => {
         dispatch(readVendor())
     }, [dispatch])
 	return (
-		<div>
+        <div>
 			<form onSubmit={handleSubmit} className="vendor_form_container">
-				{errors && <p>{errors.errors}</p>}
+                {errors && errors.map(error => <p>{error}</p>)}
 				<input
 					className="vendor_form_input"
 					type="text"

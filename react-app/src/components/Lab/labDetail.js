@@ -11,6 +11,7 @@ import UpdateLabForm from "./update";
 import DeleteLabButton from "./delete";
 import { readLab } from "../../store/lab";
 import { readProfile } from '../../store/profiles'
+import Loading from "../Loading";
 
 const LabDetail = () => {
     const dispatch = useDispatch()
@@ -23,6 +24,7 @@ const LabDetail = () => {
     let profileEhs;
     let lab;
     let tally = 0;
+    let color 
     useEffect(() => {
         dispatch(readProfile()).then(()=>dispatch(readLab())).then(() => setIsLoading(false))
     }, [dispatch])
@@ -35,16 +37,21 @@ const LabDetail = () => {
             if (barrel.is_full === true) tally += 1;
         })
     }
+
+    tally > 0 ? color = 'red' : color = 'green';
+    console.log(color)
+
     if (profiles) {
         profile = profiles[0];
         profileEhs = profile.is_EHS;
     }
    
-    if(isLoading) return <img src='../../resources/images/flask.svg' alt='flask'/>
+   
+    if (isLoading) return <Loading />
     return (
         <div className="ld ld-blur-in">
           {profileEhs &&  <div>
-                <OpenModalButton className={'button'} buttonText={'Update Lab'} modalComponent={<UpdateLabForm state={id} />} />
+                <OpenModalButton className={'button'} buttonText={'Update Lab'} modalComponent={<UpdateLabForm state={{labId: id, lab:lab}} />} />
                 <OpenModalButton className={'button'} buttonText={'Delete Lab'} modalComponent={<DeleteLabButton state={id} />} />
             </div>}
             <h1>hi from Lab detail</h1>
@@ -59,14 +66,14 @@ const LabDetail = () => {
                     <p>Waste Capacity: {barrel.wasteCapacity} Gallons </p>
                     <p>Full: {barrel.is_full ? 'Yes' : 'No'}</p>
                   {profileEhs &&  <div>
-                    <OpenModalButton className={'button'} buttonText={'Update Barrel'} modalComponent={<UpdateBarrelForm state={{'lab_id': id,'barrel_id': barrel.id}} /> } />
+                    <OpenModalButton className={'button'} buttonText={'Update Barrel'} modalComponent={<UpdateBarrelForm state={{'lab_id': id,'barrel_id': barrel.id, barrels: lab.barrels}} /> } />
                     <OpenModalButton className={'button'} buttonText={"Delete Barrel"} modalComponent={<DeleteBarrelButton state={{'lab_id': id,'barrel_id': barrel.id}} />} />
                         </div>}
                 </div>    
             ))}
             </div>
           {profileEhs &&  <OpenModalButton className={'button'} buttonText={'Add Barrel'} modalComponent={<CreateBarrelForm state={lab}/>}  />}
-        <div className="tally">
+        <div className={`tally ${color} ld ld-bounce-in`}>
                 <h2> {tally} full drums in this lab </h2>
                 </div>
         </div>
