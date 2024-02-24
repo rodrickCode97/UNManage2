@@ -20,20 +20,19 @@ const VendorDetail = (state) => {
       profile = profiles[0];
        profileEhs = profile.is_EHS;
     }
-    console.log(profileEhs)
     const vendorsArr = Object.values(vendors);
     const currentVendor = vendorsArr.filter(vendor => vendor.id === Number(id))
     const vendor= currentVendor[0]
     return (
         <div className={"vendor_container"}>
+            
+            <h1 className="vendor_name"> {vendor.name}</h1>
+            <h2 className="vendor_phone"> Phone: {vendor.phoneNumber}</h2>
+            <h2 className="vendor_email"> Email: {vendor.email}</h2>
           {profileEhs &&  <div>
-                <OpenModalButton className={'button'} buttonText={'Update Vendor'} modalComponent={<UpdateVendorForm state={{id: id, vendor:vendor}} />} />
+                <OpenModalButton className={'button'} buttonText={'Update Vendor'} modalComponent={<UpdateVendorForm state={{id: id, vendor:vendor}} className={'vendor_modal'} />} />
                 <OpenModalButton className={'button'} buttonText={'Delete Vendor'} modalComponent={<DeleteVendorButton state={id} />} />
             </div>}
-            <h1>hi from Vendor detail</h1>
-            <h1> {vendor.name}, </h1>
-            <h2> Phone: {vendor.phoneNumber}</h2>
-            <h2> Email: {vendor.email}</h2>
         </div>
 )
 

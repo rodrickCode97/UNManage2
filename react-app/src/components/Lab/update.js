@@ -52,7 +52,7 @@ const UpdateLabForm = (state) => {
 			<form onSubmit={handleSubmit} className="barrel_form_container">
                 {errors && <p>{errors.errors}</p>}
 				
-				
+				<p>Building Number:</p>
                 <input
 					className="barrel_form_input"
 					type="number"
@@ -61,6 +61,8 @@ const UpdateLabForm = (state) => {
 					name="BuildingNumber"
 					required
                 />
+                <br />
+                <p>Lab Number:</p>
                 <input
 					className="barrel_form_input"
 					type="number"
@@ -69,7 +71,9 @@ const UpdateLabForm = (state) => {
 					name="RoomNumber"
 					required
                 />
-				<button type="submit" className="submitButton">
+                <br/>
+                <br/>
+				<button type="submit" className="button">
 					Update Lab
 				</button>
 			</form>

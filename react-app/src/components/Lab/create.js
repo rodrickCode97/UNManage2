@@ -52,7 +52,7 @@ const CreateLabForm = () => {
 		<div>
 			<form onSubmit={handleSubmit} className="barrel_form_container">
 				{errors && <p>{errors.errors}</p>}
-				
+				<p>Building Number:</p>
                 <input
 					className="barrel_form_input"
 					type="number"
@@ -62,6 +62,8 @@ const CreateLabForm = () => {
 					placeholder={7}
 					required
                 />
+                <br />
+                <p>Lab Number:</p>
                 <input
 					className="barrel_form_input"
 					type="number"
@@ -71,7 +73,8 @@ const CreateLabForm = () => {
 					placeholder={1}
 					required
                 />
-				<button type="submit" className="submitButton">
+                <br/>
+				<button type="submit" className="button">
 					Add Lab
 				</button>
 			</form>

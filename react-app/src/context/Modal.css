@@ -7,6 +7,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  margin: 25% auto;
 }
 
 #modal-background {
@@ -15,13 +17,23 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background: url('../../src/resources/images/spotlight2.svg');
+  opacity: 80%;
+  background-attachment: absolute;
+	background-size: cover;
 }
 
 #modal-content {
   position: absolute;
   background-color:#292929;
   border-radius: 20px;
+  text-align: center;
   width: 60vw;
-  height: 50vh;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 10% auto;
 }

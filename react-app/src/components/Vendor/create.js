@@ -61,6 +61,8 @@ const CreateVendorForm = () => {
 					placeholder="Enter Name"
 					required
                 />
+                <br/>
+
                 <input
 					className="vendor_form_input"
 					type="text"
@@ -70,6 +72,8 @@ const CreateVendorForm = () => {
 					placeholder="Enter Phone Number"
 					required
                 />
+                <br/>
+
                 <input
 					className="vendor_form_input"
 					type="text"
@@ -79,6 +83,7 @@ const CreateVendorForm = () => {
 					placeholder="Enter E-Mail"
 					required
                 />
+                <br/>
               
 				<button type="submit" className="button">
 					Add Vendor

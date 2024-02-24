@@ -75,6 +75,7 @@ const UpdateBarrelForm = (state) => {
           <option value="UN3062"> UN3062 </option>      
         </select>
         </label>
+        <br />
         <label>
         Choose a Waste Type:
         <select
@@ -88,7 +89,8 @@ const UpdateBarrelForm = (state) => {
           <option value={`Flammable Corrosive`}>Flammable Corrosive</option>      
           <option value="HPLC">HPLC Solid</option>      
         </select>
-                </label>
+        </label>
+        <br/>
                 <label>
         Choose a Barrel Size:
         <select
@@ -101,6 +103,7 @@ const UpdateBarrelForm = (state) => {
         </select>
                 </label>
                 <p> Gallons</p>
+                <br/>
     <p>Is Barrel Full?</p>
     <div>
       <input type="radio" id="choice1" name="contact" value={true} onChange={handleIs_full} />

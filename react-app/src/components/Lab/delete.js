@@ -32,8 +32,8 @@ const DeleteLabButton = (state) => {
     return (
         <div>
             <p>Are You Sure You want to delete this lab?</p>
-       <button type='submit' onClick={handleDelete}> Delete Lab</button>
-       <button type='submit' onClick={handleCancel}> Cancel</button>
+       <button type='submit' className='button' onClick={handleDelete}> Delete Lab</button>
+       <button type='submit' className='button' onClick={handleCancel}> Cancel</button>
         </div>
     )
 }

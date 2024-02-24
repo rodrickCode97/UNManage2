@@ -35,8 +35,8 @@ const Vendors = () => {
  
     if(isLoading) return <Loading />
     return (
-        <div className='vendor_container'>
-            <h1>Hello From Vendors</h1>
+        <div className='vendor_container '>
+            <h1>Vendors</h1>
             <p> Current Vendors:</p>
             <div className='vendors'>  
             { profileEhs && <OpenModalButton buttonText={'Add Vendor'} modalComponent={<CreateVendorForm  />} className='add_vendor' />}

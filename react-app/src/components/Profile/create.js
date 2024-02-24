@@ -71,7 +71,9 @@ const CreateProfileForm = () => {
                     <label for='False'>
                     No
                     </label>
-        </label>
+                </label>
+                <br/>
+                
         <label>
         Choose a profile theme:
         <select
@@ -83,8 +85,9 @@ const CreateProfileForm = () => {
           <option value="purple"> purple </option>
           <option value="blue"> Blue</option>      
         </select>
-        </label>
-				<button type="submit" className="submitButton">
+                </label>
+                <br/>
+				<button type="submit" className="button">
 					Create Profile
 				</button>
 			</form>

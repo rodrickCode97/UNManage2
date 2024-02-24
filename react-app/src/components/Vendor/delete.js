@@ -34,8 +34,8 @@ const DeleteVendorButton = (state) => {
     return (
         <div>
             
-       <button type='submit' onClick={handleDelete}> Delete Vendor</button>
-       <button type='submit' onClick={handleCancel}> Cancel</button>
+       <button type='submit' className='button'  onClick={handleDelete}> Delete Vendor</button>
+       <button type='submit' className='button' onClick={handleCancel}> Cancel</button>
            
         </div>
     )

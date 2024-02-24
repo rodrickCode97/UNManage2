@@ -51,7 +51,8 @@ const UpdateVendorForm = (state) => {
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="vendor_form_container">
-            {errors && errors.map(error => <p>{error}</p>)}
+                {errors && errors.map(error => <p>{error}</p>)}
+                <p>Name:</p>
 				<input
 					className="vendor_form_input"
 					type="text"
@@ -60,6 +61,8 @@ const UpdateVendorForm = (state) => {
 					name="name"
 					required
                 />
+                <br/>
+                <p>Phone Number:</p>
                 <input
 					className="vendor_form_input"
 					type="text"
@@ -68,6 +71,8 @@ const UpdateVendorForm = (state) => {
 					name="phoneNumber"
 					required
                 />
+                <br/>
+                <p>Email:</p>
                 <input
 					className="vendor_form_input"
 					type="text"
@@ -77,6 +82,7 @@ const UpdateVendorForm = (state) => {
 					placeholder="Enter E-Mail"
 					required
                 />
+                <br/>
               
 				<button type="submit" className="button">
 					Update Vendor

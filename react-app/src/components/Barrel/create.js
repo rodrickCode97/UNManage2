@@ -68,12 +68,13 @@ const CreateBarrelForm = (state) => {
           <option value="UN3062"> UN3062 </option>      
         </select>
         </label>
+        <br />
         <label>
         Choose a Waste Type:
         <select
           value={wasteType}
           onChange={handleWasteType}
-        >
+          >
           <option value="Solvent">Solvent</option>
           <option  value="Aqueous">Aqueous</option>
           <option value="Acid">Acid</option>
@@ -81,7 +82,8 @@ const CreateBarrelForm = (state) => {
           <option value={`Flammable Corrosive`}>Flammable Corrosive</option>      
           <option value="HPLC">HPLC Solid</option>      
         </select>
-                </label>
+        </label>
+        <br />
                 <label>
         Choose a Barrel Size:
         <select
@@ -92,8 +94,9 @@ const CreateBarrelForm = (state) => {
           <option value={35}> 35 Gallons </option>
           <option value={25}> 25 Gallons </option>   
         </select>
-                </label>
-				<button type="submit" className="submitButton">
+        </label>
+        <br/>
+				<button type="submit" className="button">
 					Add Barrel
 				</button>
 			</form>
