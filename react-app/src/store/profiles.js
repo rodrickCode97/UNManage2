@@ -95,8 +95,8 @@ const ProfileReducer = (state = initState, action) => {
     switch (action.type) {
         
         case CREATE:
-            const id = action.payload.id;
             const newObj = { ...state };
+            const id = action.payload.id;
             newObj.profiles[id] = action.payload;
             return newObj;
         case READ:
@@ -112,7 +112,7 @@ const ProfileReducer = (state = initState, action) => {
             return newState
         case DELETE:
             const new_state = { ...state };
-            delete new_state.profiles[action.payload];
+            delete new_state.profiles[0];
             return new_state;
         default:
             return state;

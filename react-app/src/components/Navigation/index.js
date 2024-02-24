@@ -3,10 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
-import menu from '../../resources/images/menu.svg'
 import vflask from '../../resources/images/flask.svg'
 
-console.log(menu)
+
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 

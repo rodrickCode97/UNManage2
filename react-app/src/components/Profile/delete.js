@@ -5,6 +5,7 @@ import OpenModalButton from '../OpenModalButton';
 import { useHistory, useParams } from 'react-router-dom';
 import { deleteProfile, readProfile } from '../../store/profiles';
 import { useModal } from '../../context/Modal';
+import { readLab } from '../../store/lab';
 
 
 const DeleteProfile = (state) => {
@@ -18,9 +19,9 @@ const DeleteProfile = (state) => {
     const ulRef = useRef();
     const history = useHistory();
     // const [isLoading, setIsLoading] = useState(true);
-    const handleDelete = e => {
+    const handleDelete = async e => {
         e.preventDefault();
-   dispatch(deleteProfile(profile_id)).then(() => dispatch(readProfile())).then(closeModal());
+        await dispatch(deleteProfile(profile_id)).then(closeModal());
         history.push('/profiles');
     }
     const cancelDelete = e => {
@@ -28,7 +29,7 @@ const DeleteProfile = (state) => {
         closeModal()
     }
     // useEffect(() => {
-    //     dispatch(readProfile()).then(() => setIsLoading(false))
+    //     dispatch(readProfile()).then(()=>dispatch(readLab()));
     // }, [dispatch])
     
     return (
