@@ -38,7 +38,7 @@ const LabDetail = () => {
         })
     }
 
-    tally > 0 ? color = 'red' : color = 'green';
+    tally > 0 ? color = 'red ld ld-jump infinite x2' : color = 'green ld ld-bounce-in';
     console.log(color)
 
     if (profiles) {
@@ -73,8 +73,8 @@ const LabDetail = () => {
             ))}
             </div>
           {profileEhs &&  <OpenModalButton className={'button'} buttonText={'Add Barrel'} modalComponent={<CreateBarrelForm state={lab}/>}  />}
-        <div className={`tally ${color} ld ld-bounce-in`}>
-                <h2> {tally} full drums in this lab </h2>
+        <div className={`tally ${color}`} >
+                <h2> {tally} full drum(s) in this lab </h2>
                 </div>
         </div>
 )
