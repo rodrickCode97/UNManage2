@@ -18,7 +18,7 @@
   left: 0;
   bottom: 0;
   background: url('../../src/resources/images/spotlight2.svg');
-  opacity: 80%;
+  opacity: 0.8;
   background-attachment: absolute;
 	background-size: cover;
 }
