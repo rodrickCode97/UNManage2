@@ -24,7 +24,7 @@ const Profile = () => {
     const session = useSelector(state => state.session)
     let user;
     useEffect(() => {
-        dispatch(readProfile()).then(() => dispatch(readLab())).then(()=> setIsLoading(false))
+        dispatch(readProfile()).then(() => dispatch(readLab())).then(() => setIsLoading(false))
       }, [dispatch]);
     if (session.user) {
         user = session.user.username
