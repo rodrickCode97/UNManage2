@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useDispatch} from "react-redux";
 import { readLab, createLab } from "../../store/lab"
 import { useModal } from "../../context/Modal";
@@ -15,7 +15,7 @@ const CreateLabForm = () => {
     const [buildingNumber, setBuildingNumber] = useState();
     const [roomNumber, setRoomNumber] = useState();
   
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState('')
     const { closeModal } = useModal();
     
     // handles
@@ -32,12 +32,12 @@ const CreateLabForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErrors({})
         try {
             await dispatch(createLab(payload)).then(() => dispatch(readLab())).then(() => closeModal());
+            setErrors({})
         } catch (data) {
-            setErrors({ ...data });
-          
+            setErrors(data.errors);
+            
         }
         setBuildingNumber('')
         setRoomNumber('')
@@ -45,13 +45,13 @@ const CreateLabForm = () => {
 
     };
 
-    // useEffect(() => {
-    //     dispatch(readLab())
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(readLab())
+    }, [dispatch])
 	return (
 		<div>
 			<form onSubmit={handleSubmit} className="barrel_form_container">
-				{errors && <p>{errors.errors}</p>}
+            {errors && errors.map(error => <p>{error}</p>)}
 				<p>Building Number:</p>
                 <input
 					className="barrel_form_input"

@@ -18,10 +18,15 @@ def username_exists(form, field):
     user = User.query.filter(User.username == username).first()
     if user:
         raise ValidationError('Username is already in use.')
+def valid_username(form, field):
+    username = field.data
+    if username.strip().isdigit():
+        raise ValidationError('Username must contain at least one letter')
+
 
 
 class SignUpForm(FlaskForm):
     username = StringField(
-        'username', validators=[DataRequired(), username_exists])
-    email = StringField('email', validators=[DataRequired(), user_exists])
+        'username', validators=[DataRequired(), username_exists, valid_username])
+    email = StringField('email', validators=[DataRequired(), user_exists, Email('please enter valid email')])
     password = StringField('password', validators=[DataRequired()])

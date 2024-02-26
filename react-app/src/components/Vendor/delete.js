@@ -33,7 +33,7 @@ const DeleteVendorButton = (state) => {
     
     return (
         <div>
-            
+            <p>Are You sure you would like to delete this vendor?</p>
        <button type='submit' className='button'  onClick={handleDelete}> Delete Vendor</button>
        <button type='submit' className='button' onClick={handleCancel}> Cancel</button>
            

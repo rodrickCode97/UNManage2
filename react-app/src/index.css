@@ -30,7 +30,9 @@
     margin: 1px;
     border-radius: 5px;
    
-
+li{
+    list-style: none;
+}
   
 }
 p{
