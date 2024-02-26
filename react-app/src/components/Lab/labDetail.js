@@ -39,7 +39,7 @@ const LabDetail = () => {
     }
 
     tally > 0 ? color = 'red ld ld-jump infinite x2' : color = 'green ld ld-bounce-in';
-    console.log(color)
+ 
 
     if (profiles) {
         profile = profiles[0];
