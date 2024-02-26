@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { login } from "../../store/session";
@@ -10,16 +10,26 @@ const DemoUserButton = () => {
     const profile = useSelector(state=> state.profiles.profiles)
     const email = 'demo@aa.io';
     const password = 'password';
+    //state
+    const [errors, setErrors] = useState([])
 
-    useEffect(() => {
-        dispatch(readProfile());
-    }, [dispatch])
-    const handleSubmit = e => {
+    // useEffect(() => {
+    //     dispatch(readProfile());
+    // }, [dispatch])
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(login(email, password));
+
+        const data = await dispatch(login(email, password));
+        await dispatch(readProfile());
+
+        if (data) {
+            setErrors(data);
+        } else {
         if (!profile) history.push('/profiles')
-        history.push('/profiles/dashboard')
-    }
+          history.push('/profiles/dashboard')
+        }
+      };
     return (
         <button type="submit" onClick={handleSubmit} className={'button'}> Demo User</button>
     )
